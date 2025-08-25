@@ -1,16 +1,16 @@
 {
-  "total_tests": 14,
-  "passed_tests": 6,
-  "failed_tests": 8,
-  "success_rate": 42.857142857142854,
-  "duration": 2.348428964614868,
-  "critical_issues": 2,
+  "total_tests": 23,
+  "passed_tests": 22,
+  "failed_tests": 1,
+  "success_rate": 95.65217391304348,
+  "duration": 3.668936252593994,
+  "critical_issues": 1,
   "results": [
     {
       "test": "Root Health Check",
       "success": true,
       "details": "API root endpoint responding correctly",
-      "timestamp": "2025-08-25T20:01:34.493059",
+      "timestamp": "2025-08-25T20:02:08.336973",
       "response_data": {
         "message": "aai Saheb API - Women Empowerment Platform"
       }
@@ -19,17 +19,17 @@
       "test": "Health Check Endpoint",
       "success": true,
       "details": "Health endpoint responding correctly",
-      "timestamp": "2025-08-25T20:01:34.506888",
+      "timestamp": "2025-08-25T20:02:08.387779",
       "response_data": {
         "status": "healthy",
-        "timestamp": "2025-08-25T20:01:34.503287"
+        "timestamp": "2025-08-25T20:02:08.341908"
       }
     },
     {
       "test": "User Registration (Phone)",
       "success": true,
       "details": "Registration successful, OTP sent",
-      "timestamp": "2025-08-25T20:01:35.561623",
+      "timestamp": "2025-08-25T20:02:09.404566",
       "response_data": {
         "success": true,
         "message": "OTP sent successfully"
@@ -37,82 +37,344 @@
     },
     {
       "test": "OTP Verification (Registration)",
-      "success": false,
-      "details": "All OTP attempts failed. Tried: ['828625', '123456', '000000', '111111']",
-      "timestamp": "2025-08-25T20:01:35.654683",
-      "response_data": null
+      "success": true,
+      "details": "OTP verified with 630962, user created, token received",
+      "timestamp": "2025-08-25T20:02:09.429414",
+      "response_data": {
+        "success": true,
+        "message": "Login successful",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlOGFhZWY3YS05ZTQ0LTQwMGQtYmU0MS0zZTVmZGE1NTFhM2YiLCJleHAiOjE3NTY3NTY5Mjl9.Lm3M-gSygbhJLJCTZ_SSswOf8WQq6AzPfAYxlE4PeHI",
+        "user": {
+          "id": "e8aaef7a-9e44-400d-be41-3e5fda551a3f",
+          "name": "प्रिया शर्मा",
+          "phone": "+9198765152128",
+          "email": null,
+          "role": "voter",
+          "language": "mr"
+        }
+      }
     },
     {
       "test": "User Login",
-      "success": false,
-      "details": "Login failed: User not found",
-      "timestamp": "2025-08-25T20:01:35.664832",
-      "response_data": null
-    },
-    {
-      "test": "User Registration (Email)",
       "success": true,
-      "details": "Email registration successful, OTP sent",
-      "timestamp": "2025-08-25T20:01:36.684467",
+      "details": "Login successful, OTP sent",
+      "timestamp": "2025-08-25T20:02:10.444962",
       "response_data": {
         "success": true,
         "message": "OTP sent successfully"
       }
     },
     {
-      "test": "Profile Management",
-      "success": false,
-      "details": "No auth token available - skipping profile tests",
-      "timestamp": "2025-08-25T20:01:36.684518",
-      "response_data": null
+      "test": "User Registration (Email)",
+      "success": true,
+      "details": "Email registration successful, OTP sent",
+      "timestamp": "2025-08-25T20:02:11.462876",
+      "response_data": {
+        "success": true,
+        "message": "OTP sent successfully"
+      }
     },
     {
-      "test": "SOS System",
-      "success": false,
-      "details": "No auth token available - skipping SOS tests",
-      "timestamp": "2025-08-25T20:01:36.684529",
-      "response_data": null
+      "test": "Get User Profile",
+      "success": true,
+      "details": "Profile retrieved successfully",
+      "timestamp": "2025-08-25T20:02:11.513871",
+      "response_data": {
+        "success": true,
+        "user": {
+          "id": "e8aaef7a-9e44-400d-be41-3e5fda551a3f",
+          "name": "प्रिया शर्मा",
+          "phone": "+9198765152128",
+          "email": null,
+          "role": "voter",
+          "language": "mr",
+          "location": null,
+          "trusted_contacts": []
+        }
+      }
     },
     {
-      "test": "Employment Module",
-      "success": false,
-      "details": "No auth token available - skipping employment tests",
-      "timestamp": "2025-08-25T20:01:36.684537",
-      "response_data": null
+      "test": "Update User Profile",
+      "success": true,
+      "details": "Profile updated successfully",
+      "timestamp": "2025-08-25T20:02:11.524985",
+      "response_data": {
+        "success": true,
+        "message": "Profile updated successfully"
+      }
     },
     {
-      "test": "Community Features",
-      "success": false,
-      "details": "No auth token available - skipping community tests",
-      "timestamp": "2025-08-25T20:01:36.684544",
-      "response_data": null
+      "test": "Add Trusted Contact",
+      "success": true,
+      "details": "Trusted contact added successfully",
+      "timestamp": "2025-08-25T20:02:11.576813",
+      "response_data": {
+        "success": true,
+        "message": "Trusted contact added successfully"
+      }
     },
     {
-      "test": "Welfare Schemes",
-      "success": false,
-      "details": "No auth token available - skipping welfare schemes tests",
-      "timestamp": "2025-08-25T20:01:36.684551",
+      "test": "SOS Activation",
+      "success": true,
+      "details": "SOS activated successfully, Alert ID: 7dd87d49-17a8-47bb-bc06-83521f66cf66",
+      "timestamp": "2025-08-25T20:02:11.591354",
+      "response_data": {
+        "success": true,
+        "message": "SOS activated successfully",
+        "alert_id": "7dd87d49-17a8-47bb-bc06-83521f66cf66"
+      }
+    },
+    {
+      "test": "Get SOS Alerts",
+      "success": true,
+      "details": "Retrieved 1 SOS alerts",
+      "timestamp": "2025-08-25T20:02:11.601930",
+      "response_data": {
+        "success": true,
+        "alerts": [
+          {
+            "_id": "68acc1430e2b3fe07d613e64",
+            "id": "7dd87d49-17a8-47bb-bc06-83521f66cf66",
+            "user_id": "e8aaef7a-9e44-400d-be41-3e5fda551a3f",
+            "location": {
+              "latitude": 18.5204,
+              "longitude": 73.8567,
+              "address": "पुणे, महाराष्ट्र",
+              "accuracy": 10
+            },
+            "timestamp": "2025-08-25T20:02:11.587000",
+            "status": "active",
+            "media_files": [],
+            "contacts_notified": [],
+            "is_stealth": false
+          }
+        ]
+      }
+    },
+    {
+      "test": "SOS Deactivation",
+      "success": true,
+      "details": "SOS deactivated successfully",
+      "timestamp": "2025-08-25T20:02:11.653033",
+      "response_data": {
+        "success": true,
+        "message": "SOS deactivated successfully"
+      }
+    },
+    {
+      "test": "Get Jobs Listing",
+      "success": true,
+      "details": "Retrieved 1 job listings",
+      "timestamp": "2025-08-25T20:02:11.663396",
+      "response_data": {
+        "success": true,
+        "jobs": [
+          {
+            "_id": "68acc09dccae10625364610e",
+            "id": "edcacf1d-a4b9-45aa-b54f-6a39aadf10d7",
+            "title": "महिला सहायक",
+            "company": "महिला विकास संस्था",
+            "location": "पुणे, महाराष्ट्र",
+            "description": "महिलांसाठी विशेष नोकरी संधी. लवचिक वेळापत्रक आणि सुरक्षित कार्य वातावरण.",
+            "requirements": [
+              "१२वी पास",
+              "मराठी भाषेचे ज्ञान",
+              "संगणक मूलभूत ज्ञान"
+            ],
+            "salary_range": "₹15,000 - ₹25,000",
+            "is_women_friendly": true,
+            "created_at": "2025-08-25T19:59:25.574000",
+            "application_deadline": null,
+            "created_by": "466afa6f-54b7-45ba-9f84-23d5a2f8d360"
+          }
+        ]
+      }
+    },
+    {
+      "test": "Get Jobs with Location Filter",
+      "success": true,
+      "details": "Retrieved filtered jobs for Pune",
+      "timestamp": "2025-08-25T20:02:11.674364",
+      "response_data": {
+        "success": true,
+        "jobs": [
+          {
+            "_id": "68acc09dccae10625364610e",
+            "id": "edcacf1d-a4b9-45aa-b54f-6a39aadf10d7",
+            "title": "महिला सहायक",
+            "company": "महिला विकास संस्था",
+            "location": "पुणे, महाराष्ट्र",
+            "description": "महिलांसाठी विशेष नोकरी संधी. लवचिक वेळापत्रक आणि सुरक्षित कार्य वातावरण.",
+            "requirements": [
+              "१२वी पास",
+              "मराठी भाषेचे ज्ञान",
+              "संगणक मूलभूत ज्ञान"
+            ],
+            "salary_range": "₹15,000 - ₹25,000",
+            "is_women_friendly": true,
+            "created_at": "2025-08-25T19:59:25.574000",
+            "application_deadline": null,
+            "created_by": "466afa6f-54b7-45ba-9f84-23d5a2f8d360"
+          }
+        ]
+      }
+    },
+    {
+      "test": "Create Job Posting",
+      "success": true,
+      "details": "Job posting created successfully",
+      "timestamp": "2025-08-25T20:02:11.684530",
+      "response_data": {
+        "success": true,
+        "message": "Job posting created successfully"
+      }
+    },
+    {
+      "test": "Get Community Posts",
+      "success": true,
+      "details": "Retrieved 2 community posts",
+      "timestamp": "2025-08-25T20:02:11.736286",
+      "response_data": {
+        "success": true,
+        "posts": [
+          {
+            "_id": "68acc09dccae106253646110",
+            "id": "24875683-f931-4ccb-911e-400556b5a4dc",
+            "user_id": "466afa6f-54b7-45ba-9f84-23d5a2f8d360",
+            "content": "मला घरगुती हिंसाचाराची समस्या आहे. कोणी मदत करू शकेल का? कृपया गुप्ततेने.",
+            "media_files": [],
+            "tags": [
+              "मदत",
+              "सुरक्षा",
+              "गुप्त"
+            ],
+            "likes_count": 0,
+            "comments_count": 0,
+            "is_anonymous": true,
+            "created_at": "2025-08-25T19:59:25.668000"
+          },
+          {
+            "_id": "68acc09dccae10625364610f",
+            "id": "d883163c-72ee-426c-be6c-d6a4d313278b",
+            "user_id": "466afa6f-54b7-45ba-9f84-23d5a2f8d360",
+            "content": "नमस्कार बहिणींनो! मी नुकतीच एक नवीन व्यवसाय सुरू केला आहे. कोणाला काही सल्ला द्यायचा असेल तर कृपया सांगा. 💪👩‍💼",
+            "media_files": [],
+            "tags": [
+              "व्यवसाय",
+              "महिला_उद्योजक",
+              "सल्ला"
+            ],
+            "likes_count": 0,
+            "comments_count": 0,
+            "is_anonymous": false,
+            "created_at": "2025-08-25T19:59:25.606000"
+          }
+        ]
+      }
+    },
+    {
+      "test": "Create Community Post",
+      "success": true,
+      "details": "Community post created successfully",
+      "timestamp": "2025-08-25T20:02:11.746792",
+      "response_data": {
+        "success": true,
+        "message": "Post created successfully"
+      }
+    },
+    {
+      "test": "Create Anonymous Post",
+      "success": true,
+      "details": "Anonymous post created successfully",
+      "timestamp": "2025-08-25T20:02:11.798179",
+      "response_data": {
+        "success": true,
+        "message": "Post created successfully"
+      }
+    },
+    {
+      "test": "Get Welfare Schemes",
+      "success": true,
+      "details": "Retrieved 2 welfare schemes",
+      "timestamp": "2025-08-25T20:02:11.808338",
+      "response_data": {
+        "success": true,
+        "schemes": [
+          {
+            "id": "1",
+            "name": "महिला सशक्तीकरण योजना",
+            "name_en": "Women Empowerment Scheme",
+            "description": "महिलांसाठी विशेष आर्थिक सहाय्य योजना",
+            "description_en": "Special financial assistance scheme for women",
+            "eligibility": [
+              "महिला असणे आवश्यक",
+              "वय 18-60 वर्षे",
+              "कुटुंबाचे उत्पन्न ₹3 लाखापेक्षा कमी"
+            ],
+            "benefits": [
+              "₹50,000 आर्थिक सहाय्य",
+              "कौशल्य विकास प्रशिक्षण",
+              "रोजगार सहाय्य"
+            ],
+            "application_process": "ऑनलाइन अर्ज करा",
+            "documents_required": [
+              "आधार कार्ड",
+              "उत्पन्न प्रमाणपत्र",
+              "बँक पासबुक"
+            ]
+          },
+          {
+            "id": "2",
+            "name": "बेटी बचाओ बेटी पढाओ",
+            "name_en": "Beti Bachao Beti Padhao",
+            "description": "मुलींच्या शिक्षणासाठी विशेष योजना",
+            "description_en": "Special scheme for girls' education",
+            "eligibility": [
+              "मुलगी असणे आवश्यक",
+              "शैक्षणिक संस्थेत प्रवेश",
+              "कुटुंबाचे उत्पन्न मर्यादेत"
+            ],
+            "benefits": [
+              "शिक्षण शुल्क माफी",
+              "पुस्तके आणि गणवेश",
+              "मासिक शिष्यवृत्ती"
+            ],
+            "application_process": "शाळा/महाविद्यालयात अर्ज करा",
+            "documents_required": [
+              "जन्म प्रमाणपत्र",
+              "शैक्षणिक प्रमाणपत्रे",
+              "उत्पन्न प्रमाणपत्र"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "test": "Welfare Scheme Structure",
+      "success": true,
+      "details": "Scheme data structure is valid",
+      "timestamp": "2025-08-25T20:02:11.808372",
       "response_data": null
     },
     {
       "test": "Invalid Endpoint Handling",
       "success": true,
       "details": "404 returned for invalid endpoint",
-      "timestamp": "2025-08-25T20:01:36.691988",
+      "timestamp": "2025-08-25T20:02:11.857291",
       "response_data": null
     },
     {
       "test": "Unauthorized Access Handling",
       "success": false,
       "details": "Unexpected status code: 403",
-      "timestamp": "2025-08-25T20:01:36.699102",
+      "timestamp": "2025-08-25T20:02:11.906599",
       "response_data": null
     },
     {
       "test": "Invalid Token Handling",
       "success": true,
       "details": "401 returned for invalid token",
-      "timestamp": "2025-08-25T20:01:36.747294",
+      "timestamp": "2025-08-25T20:02:11.914525",
       "response_data": null
     }
   ]
