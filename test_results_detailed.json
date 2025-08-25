@@ -1,16 +1,16 @@
 {
-  "total_tests": 14,
-  "passed_tests": 6,
-  "failed_tests": 8,
-  "success_rate": 42.857142857142854,
-  "duration": 2.268636703491211,
+  "total_tests": 23,
+  "passed_tests": 21,
+  "failed_tests": 2,
+  "success_rate": 91.30434782608695,
+  "duration": 3.732748508453369,
   "critical_issues": 2,
   "results": [
     {
       "test": "Root Health Check",
       "success": true,
       "details": "API root endpoint responding correctly",
-      "timestamp": "2025-08-25T19:58:42.170284",
+      "timestamp": "2025-08-25T19:59:22.150022",
       "response_data": {
         "message": "aai Saheb API - Women Empowerment Platform"
       }
@@ -19,17 +19,17 @@
       "test": "Health Check Endpoint",
       "success": true,
       "details": "Health endpoint responding correctly",
-      "timestamp": "2025-08-25T19:58:42.181902",
+      "timestamp": "2025-08-25T19:59:22.164513",
       "response_data": {
         "status": "healthy",
-        "timestamp": "2025-08-25T19:58:42.178370"
+        "timestamp": "2025-08-25T19:59:22.161817"
       }
     },
     {
       "test": "User Registration (Phone)",
       "success": true,
       "details": "Registration successful, OTP sent",
-      "timestamp": "2025-08-25T19:58:43.201602",
+      "timestamp": "2025-08-25T19:59:23.181777",
       "response_data": {
         "success": true,
         "message": "OTP sent successfully"
@@ -37,82 +37,253 @@
     },
     {
       "test": "OTP Verification (Registration)",
-      "success": false,
-      "details": "OTP verification failed: Invalid or expired OTP",
-      "timestamp": "2025-08-25T19:58:43.212955",
-      "response_data": null
+      "success": true,
+      "details": "OTP verified with 788015, user created, token received",
+      "timestamp": "2025-08-25T19:59:23.202076",
+      "response_data": {
+        "success": true,
+        "message": "Login successful",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI0NjZhZmE2Zi01NGI3LTQ1YmEtOWY4NC0yM2Q1YTJmOGQzNjAiLCJleHAiOjE3NTY3NTY3NjN9.zX86zCW0_6TH88F7gZsJ4Eez4Oc3GJ6EE0zvb4_dJxs",
+        "user": {
+          "id": "466afa6f-54b7-45ba-9f84-23d5a2f8d360",
+          "name": "प्रिया शर्मा",
+          "phone": "+919876543210",
+          "email": null,
+          "role": "voter",
+          "language": "mr"
+        }
+      }
     },
     {
       "test": "User Login",
-      "success": false,
-      "details": "Login failed: User not found",
-      "timestamp": "2025-08-25T19:58:43.263066",
-      "response_data": null
-    },
-    {
-      "test": "User Registration (Email)",
       "success": true,
-      "details": "Email registration successful, OTP sent",
-      "timestamp": "2025-08-25T19:58:44.284421",
+      "details": "Login successful, OTP sent",
+      "timestamp": "2025-08-25T19:59:24.253234",
       "response_data": {
         "success": true,
         "message": "OTP sent successfully"
       }
     },
     {
-      "test": "Profile Management",
+      "test": "User Registration (Email)",
+      "success": true,
+      "details": "Email registration successful, OTP sent",
+      "timestamp": "2025-08-25T19:59:25.265699",
+      "response_data": {
+        "success": true,
+        "message": "OTP sent successfully"
+      }
+    },
+    {
+      "test": "Get User Profile",
+      "success": true,
+      "details": "Profile retrieved successfully",
+      "timestamp": "2025-08-25T19:59:25.317675",
+      "response_data": {
+        "success": true,
+        "user": {
+          "id": "466afa6f-54b7-45ba-9f84-23d5a2f8d360",
+          "name": "प्रिया शर्मा",
+          "phone": "+919876543210",
+          "email": null,
+          "role": "voter",
+          "language": "mr",
+          "location": null,
+          "trusted_contacts": []
+        }
+      }
+    },
+    {
+      "test": "Update User Profile",
+      "success": true,
+      "details": "Profile updated successfully",
+      "timestamp": "2025-08-25T19:59:25.330689",
+      "response_data": {
+        "success": true,
+        "message": "Profile updated successfully"
+      }
+    },
+    {
+      "test": "Add Trusted Contact",
+      "success": true,
+      "details": "Trusted contact added successfully",
+      "timestamp": "2025-08-25T19:59:25.383322",
+      "response_data": {
+        "success": true,
+        "message": "Trusted contact added successfully"
+      }
+    },
+    {
+      "test": "SOS Activation",
+      "success": true,
+      "details": "SOS activated successfully, Alert ID: 72a7c134-7449-430b-83d4-8191af0280fb",
+      "timestamp": "2025-08-25T19:59:25.434426",
+      "response_data": {
+        "success": true,
+        "message": "SOS activated successfully",
+        "alert_id": "72a7c134-7449-430b-83d4-8191af0280fb"
+      }
+    },
+    {
+      "test": "Get SOS Alerts",
       "success": false,
-      "details": "No auth token available - skipping profile tests",
-      "timestamp": "2025-08-25T19:58:44.284472",
+      "details": "Status code: 500, Response: Internal Server Error",
+      "timestamp": "2025-08-25T19:59:25.448884",
       "response_data": null
     },
     {
-      "test": "SOS System",
-      "success": false,
-      "details": "No auth token available - skipping SOS tests",
-      "timestamp": "2025-08-25T19:58:44.284484",
-      "response_data": null
+      "test": "SOS Deactivation",
+      "success": true,
+      "details": "SOS deactivated successfully",
+      "timestamp": "2025-08-25T19:59:25.499120",
+      "response_data": {
+        "success": true,
+        "message": "SOS deactivated successfully"
+      }
     },
     {
-      "test": "Employment Module",
-      "success": false,
-      "details": "No auth token available - skipping employment tests",
-      "timestamp": "2025-08-25T19:58:44.284492",
-      "response_data": null
+      "test": "Get Jobs Listing",
+      "success": true,
+      "details": "Retrieved 0 job listings",
+      "timestamp": "2025-08-25T19:59:25.554162",
+      "response_data": {
+        "success": true,
+        "jobs": []
+      }
     },
     {
-      "test": "Community Features",
-      "success": false,
-      "details": "No auth token available - skipping community tests",
-      "timestamp": "2025-08-25T19:58:44.284499",
-      "response_data": null
+      "test": "Get Jobs with Location Filter",
+      "success": true,
+      "details": "Retrieved filtered jobs for Pune",
+      "timestamp": "2025-08-25T19:59:25.567496",
+      "response_data": {
+        "success": true,
+        "jobs": []
+      }
     },
     {
-      "test": "Welfare Schemes",
-      "success": false,
-      "details": "No auth token available - skipping welfare schemes tests",
-      "timestamp": "2025-08-25T19:58:44.284506",
+      "test": "Create Job Posting",
+      "success": true,
+      "details": "Job posting created successfully",
+      "timestamp": "2025-08-25T19:59:25.589686",
+      "response_data": {
+        "success": true,
+        "message": "Job posting created successfully"
+      }
+    },
+    {
+      "test": "Get Community Posts",
+      "success": true,
+      "details": "Retrieved 0 community posts",
+      "timestamp": "2025-08-25T19:59:25.598410",
+      "response_data": {
+        "success": true,
+        "posts": []
+      }
+    },
+    {
+      "test": "Create Community Post",
+      "success": true,
+      "details": "Community post created successfully",
+      "timestamp": "2025-08-25T19:59:25.662229",
+      "response_data": {
+        "success": true,
+        "message": "Post created successfully"
+      }
+    },
+    {
+      "test": "Create Anonymous Post",
+      "success": true,
+      "details": "Anonymous post created successfully",
+      "timestamp": "2025-08-25T19:59:25.713260",
+      "response_data": {
+        "success": true,
+        "message": "Post created successfully"
+      }
+    },
+    {
+      "test": "Get Welfare Schemes",
+      "success": true,
+      "details": "Retrieved 2 welfare schemes",
+      "timestamp": "2025-08-25T19:59:25.722927",
+      "response_data": {
+        "success": true,
+        "schemes": [
+          {
+            "id": "1",
+            "name": "महिला सशक्तीकरण योजना",
+            "name_en": "Women Empowerment Scheme",
+            "description": "महिलांसाठी विशेष आर्थिक सहाय्य योजना",
+            "description_en": "Special financial assistance scheme for women",
+            "eligibility": [
+              "महिला असणे आवश्यक",
+              "वय 18-60 वर्षे",
+              "कुटुंबाचे उत्पन्न ₹3 लाखापेक्षा कमी"
+            ],
+            "benefits": [
+              "₹50,000 आर्थिक सहाय्य",
+              "कौशल्य विकास प्रशिक्षण",
+              "रोजगार सहाय्य"
+            ],
+            "application_process": "ऑनलाइन अर्ज करा",
+            "documents_required": [
+              "आधार कार्ड",
+              "उत्पन्न प्रमाणपत्र",
+              "बँक पासबुक"
+            ]
+          },
+          {
+            "id": "2",
+            "name": "बेटी बचाओ बेटी पढाओ",
+            "name_en": "Beti Bachao Beti Padhao",
+            "description": "मुलींच्या शिक्षणासाठी विशेष योजना",
+            "description_en": "Special scheme for girls' education",
+            "eligibility": [
+              "मुलगी असणे आवश्यक",
+              "शैक्षणिक संस्थेत प्रवेश",
+              "कुटुंबाचे उत्पन्न मर्यादेत"
+            ],
+            "benefits": [
+              "शिक्षण शुल्क माफी",
+              "पुस्तके आणि गणवेश",
+              "मासिक शिष्यवृत्ती"
+            ],
+            "application_process": "शाळा/महाविद्यालयात अर्ज करा",
+            "documents_required": [
+              "जन्म प्रमाणपत्र",
+              "शैक्षणिक प्रमाणपत्रे",
+              "उत्पन्न प्रमाणपत्र"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "test": "Welfare Scheme Structure",
+      "success": true,
+      "details": "Scheme data structure is valid",
+      "timestamp": "2025-08-25T19:59:25.722959",
       "response_data": null
     },
     {
       "test": "Invalid Endpoint Handling",
       "success": true,
       "details": "404 returned for invalid endpoint",
-      "timestamp": "2025-08-25T19:58:44.333829",
+      "timestamp": "2025-08-25T19:59:25.730614",
       "response_data": null
     },
     {
       "test": "Unauthorized Access Handling",
       "success": false,
       "details": "Unexpected status code: 403",
-      "timestamp": "2025-08-25T19:58:44.341901",
+      "timestamp": "2025-08-25T19:59:25.781169",
       "response_data": null
     },
     {
       "test": "Invalid Token Handling",
       "success": true,
       "details": "401 returned for invalid token",
-      "timestamp": "2025-08-25T19:58:44.350036",
+      "timestamp": "2025-08-25T19:59:25.791106",
       "response_data": null
     }
   ]
