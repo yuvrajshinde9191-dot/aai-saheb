@@ -306,8 +306,12 @@ async def verify_otp(otp_data: OTPVerify):
                 is_verified=True
             )
             
-            await db.users.insert_one(user_data.dict())
-            user = user_data.dict()
+            # Convert to dict and remove None values to avoid unique constraint issues
+            user_dict = user_data.dict()
+            user_dict = {k: v for k, v in user_dict.items() if v is not None}
+            
+            await db.users.insert_one(user_dict)
+            user = user_dict
         
         # Delete used OTP
         await db.otps.delete_one({"_id": otp_record["_id"]})
