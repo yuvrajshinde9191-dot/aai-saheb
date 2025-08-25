@@ -1,16 +1,37 @@
-import { Text, View, StyleSheet, Image } from "react-native";
+import { useEffect } from 'react';
+import { router } from 'expo-router';
+import { View, StyleSheet } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { StatusBar } from 'expo-status-bar';
+import LoadingScreen from '../components/LoadingScreen';
 
-const EXPO_PUBLIC_BACKEND_URL = process.env.EXPO_PUBLIC_BACKEND_URL;
+export default function IndexPage() {
+  useEffect(() => {
+    checkAuthStatus();
+  }, []);
 
-export default function Index() {
-  console.log(EXPO_PUBLIC_BACKEND_URL, "EXPO_PUBLIC_BACKEND_URL");
+  const checkAuthStatus = async () => {
+    try {
+      const token = await AsyncStorage.getItem('userToken');
+      const hasCompletedOnboarding = await AsyncStorage.getItem('onboardingCompleted');
+      
+      if (!hasCompletedOnboarding) {
+        router.replace('/onboarding');
+      } else if (token) {
+        router.replace('/(tabs)');
+      } else {
+        router.replace('/auth');
+      }
+    } catch (error) {
+      console.error('Error checking auth status:', error);
+      router.replace('/auth');
+    }
+  };
 
   return (
     <View style={styles.container}>
-      <Image
-        source={require("../assets/images/app-image.png")}
-        style={styles.image}
-      />
+      <StatusBar style="auto" />
+      <LoadingScreen />
     </View>
   );
 }
@@ -18,13 +39,6 @@ export default function Index() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#0c0c0c",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  image: {
-    width: "100%",
-    height: "100%",
-    resizeMode: "contain",
+    backgroundColor: '#1a1a1a',
   },
 });
