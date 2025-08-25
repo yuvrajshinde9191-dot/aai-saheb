@@ -630,6 +630,14 @@ async def global_exception_handler(request, exc):
 async def startup_event():
     logger.info("aai Saheb API starting up...")
     
+    # Drop existing indexes that might not be sparse
+    try:
+        await db.users.drop_index("phone_1")
+        await db.users.drop_index("email_1")
+        logger.info("Dropped existing indexes")
+    except Exception as e:
+        logger.info(f"No existing indexes to drop: {e}")
+    
     # Create indexes for better performance
     await db.users.create_index("phone", unique=True, sparse=True)
     await db.users.create_index("email", unique=True, sparse=True)
