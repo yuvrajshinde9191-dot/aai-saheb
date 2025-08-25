@@ -534,6 +534,11 @@ async def get_community_posts(
     try:
         posts = await db.community_posts.find({}).skip(skip).limit(limit).sort("created_at", -1).to_list(limit)
         
+        # Convert ObjectId to string for JSON serialization
+        for post in posts:
+            if "_id" in post:
+                post["_id"] = str(post["_id"])
+        
         return {"success": True, "posts": posts}
         
     except Exception as e:
