@@ -402,6 +402,11 @@ async def get_sos_alerts(current_user: dict = Depends(get_current_user)):
             {"user_id": current_user["id"]}
         ).sort("timestamp", -1).limit(50).to_list(50)
         
+        # Convert ObjectId to string for JSON serialization
+        for alert in alerts:
+            if "_id" in alert:
+                alert["_id"] = str(alert["_id"])
+        
         return {"success": True, "alerts": alerts}
         
     except Exception as e:
