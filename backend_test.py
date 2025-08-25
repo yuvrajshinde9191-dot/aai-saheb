@@ -149,17 +149,22 @@ class AaiSahebAPITester:
                     "phone": self.test_user_data["phone"],
                     "otp": otp
                 }
-            
-            response = self.make_request("POST", "/auth/verify-otp", otp_data)
-            if response.status_code == 200:
-                data = response.json()
-                if data.get("success") and "token" in data:
-                    self.auth_token = data["token"]
-                    self.log_test("OTP Verification (Registration)", True, "OTP verified, user created, token received", data)
+                
+                response = self.make_request("POST", "/auth/verify-otp", otp_data)
+                if response.status_code == 200:
+                    data = response.json()
+                    if data.get("success") and "token" in data:
+                        self.auth_token = data["token"]
+                        self.log_test("OTP Verification (Registration)", True, f"OTP verified with {otp}, user created, token received", data)
+                        success = True
+                        break
+                    else:
+                        print(f"OTP {otp} failed: {data.get('message', 'Unknown error')}")
                 else:
-                    self.log_test("OTP Verification (Registration)", False, f"OTP verification failed: {data.get('message', 'Unknown error')}")
-            else:
-                self.log_test("OTP Verification (Registration)", False, f"Status code: {response.status_code}, Response: {response.text}")
+                    print(f"OTP {otp} failed with status {response.status_code}")
+            
+            if not success:
+                self.log_test("OTP Verification (Registration)", False, f"All OTP attempts failed. Tried: {test_otps}")
         except Exception as e:
             self.log_test("OTP Verification (Registration)", False, f"Exception: {str(e)}")
         
