@@ -17,10 +17,14 @@ class AaiSahebAPITester:
         self.base_url = "https://wompower-mh.preview.emergentagent.com/api"
         self.session = requests.Session()
         self.auth_token = None
+        
+        # Use unique phone number for each test run to avoid conflicts
+        import time
+        timestamp = str(int(time.time()))[-6:]  # Last 6 digits of timestamp
         self.test_user_data = {
             "name": "प्रिया शर्मा",  # Priya Sharma in Marathi
-            "phone": "+919876543210",
-            "email": "priya.sharma@example.com"
+            "phone": f"+9198765{timestamp}",  # Unique phone number
+            "email": f"priya.test.{timestamp}@example.com"  # Unique email
         }
         self.test_results = []
         
