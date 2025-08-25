@@ -3,14 +3,14 @@
   "passed_tests": 6,
   "failed_tests": 8,
   "success_rate": 42.857142857142854,
-  "duration": 2.343186855316162,
+  "duration": 2.408543348312378,
   "critical_issues": 2,
   "results": [
     {
       "test": "Root Health Check",
       "success": true,
       "details": "API root endpoint responding correctly",
-      "timestamp": "2025-08-25T20:00:25.249751",
+      "timestamp": "2025-08-25T20:00:53.325405",
       "response_data": {
         "message": "aai Saheb API - Women Empowerment Platform"
       }
@@ -19,41 +19,41 @@
       "test": "Health Check Endpoint",
       "success": true,
       "details": "Health endpoint responding correctly",
-      "timestamp": "2025-08-25T20:00:25.261623",
+      "timestamp": "2025-08-25T20:00:53.374346",
       "response_data": {
         "status": "healthy",
-        "timestamp": "2025-08-25T20:00:25.258303"
+        "timestamp": "2025-08-25T20:00:53.330310"
       }
     },
     {
       "test": "User Registration (Phone)",
-      "success": false,
-      "details": "Registration failed: User already exists",
-      "timestamp": "2025-08-25T20:00:25.275460",
-      "response_data": null
-    },
-    {
-      "test": "OTP Verification (Registration)",
-      "success": false,
-      "details": "All OTP attempts failed. Tried: ['123456', '000000', '111111']",
-      "timestamp": "2025-08-25T20:00:25.360119",
-      "response_data": null
-    },
-    {
-      "test": "User Login",
       "success": true,
-      "details": "Login successful, OTP sent",
-      "timestamp": "2025-08-25T20:00:26.417287",
+      "details": "Registration successful, OTP sent",
+      "timestamp": "2025-08-25T20:00:54.426278",
       "response_data": {
         "success": true,
         "message": "OTP sent successfully"
       }
     },
     {
+      "test": "OTP Verification (Registration)",
+      "success": false,
+      "details": "All OTP attempts failed. Tried: ['245361', '123456', '000000', '111111']",
+      "timestamp": "2025-08-25T20:00:54.522207",
+      "response_data": null
+    },
+    {
+      "test": "User Login",
+      "success": false,
+      "details": "Login failed: User not found",
+      "timestamp": "2025-08-25T20:00:54.571387",
+      "response_data": null
+    },
+    {
       "test": "User Registration (Email)",
       "success": true,
       "details": "Email registration successful, OTP sent",
-      "timestamp": "2025-08-25T20:00:27.434558",
+      "timestamp": "2025-08-25T20:00:55.629042",
       "response_data": {
         "success": true,
         "message": "OTP sent successfully"
@@ -63,56 +63,56 @@
       "test": "Profile Management",
       "success": false,
       "details": "No auth token available - skipping profile tests",
-      "timestamp": "2025-08-25T20:00:27.434610",
+      "timestamp": "2025-08-25T20:00:55.629093",
       "response_data": null
     },
     {
       "test": "SOS System",
       "success": false,
       "details": "No auth token available - skipping SOS tests",
-      "timestamp": "2025-08-25T20:00:27.434620",
+      "timestamp": "2025-08-25T20:00:55.629102",
       "response_data": null
     },
     {
       "test": "Employment Module",
       "success": false,
       "details": "No auth token available - skipping employment tests",
-      "timestamp": "2025-08-25T20:00:27.434627",
+      "timestamp": "2025-08-25T20:00:55.629110",
       "response_data": null
     },
     {
       "test": "Community Features",
       "success": false,
       "details": "No auth token available - skipping community tests",
-      "timestamp": "2025-08-25T20:00:27.434668",
+      "timestamp": "2025-08-25T20:00:55.629117",
       "response_data": null
     },
     {
       "test": "Welfare Schemes",
       "success": false,
       "details": "No auth token available - skipping welfare schemes tests",
-      "timestamp": "2025-08-25T20:00:27.434677",
+      "timestamp": "2025-08-25T20:00:55.629123",
       "response_data": null
     },
     {
       "test": "Invalid Endpoint Handling",
       "success": true,
       "details": "404 returned for invalid endpoint",
-      "timestamp": "2025-08-25T20:00:27.443096",
+      "timestamp": "2025-08-25T20:00:55.638793",
       "response_data": null
     },
     {
       "test": "Unauthorized Access Handling",
       "success": false,
       "details": "Unexpected status code: 403",
-      "timestamp": "2025-08-25T20:00:27.492195",
+      "timestamp": "2025-08-25T20:00:55.649166",
       "response_data": null
     },
     {
       "test": "Invalid Token Handling",
       "success": true,
       "details": "401 returned for invalid token",
-      "timestamp": "2025-08-25T20:00:27.501258",
+      "timestamp": "2025-08-25T20:00:55.656719",
       "response_data": null
     }
   ]
