@@ -1,0 +1,119 @@
+{
+  "total_tests": 14,
+  "passed_tests": 6,
+  "failed_tests": 8,
+  "success_rate": 42.857142857142854,
+  "duration": 2.268636703491211,
+  "critical_issues": 2,
+  "results": [
+    {
+      "test": "Root Health Check",
+      "success": true,
+      "details": "API root endpoint responding correctly",
+      "timestamp": "2025-08-25T19:58:42.170284",
+      "response_data": {
+        "message": "aai Saheb API - Women Empowerment Platform"
+      }
+    },
+    {
+      "test": "Health Check Endpoint",
+      "success": true,
+      "details": "Health endpoint responding correctly",
+      "timestamp": "2025-08-25T19:58:42.181902",
+      "response_data": {
+        "status": "healthy",
+        "timestamp": "2025-08-25T19:58:42.178370"
+      }
+    },
+    {
+      "test": "User Registration (Phone)",
+      "success": true,
+      "details": "Registration successful, OTP sent",
+      "timestamp": "2025-08-25T19:58:43.201602",
+      "response_data": {
+        "success": true,
+        "message": "OTP sent successfully"
+      }
+    },
+    {
+      "test": "OTP Verification (Registration)",
+      "success": false,
+      "details": "OTP verification failed: Invalid or expired OTP",
+      "timestamp": "2025-08-25T19:58:43.212955",
+      "response_data": null
+    },
+    {
+      "test": "User Login",
+      "success": false,
+      "details": "Login failed: User not found",
+      "timestamp": "2025-08-25T19:58:43.263066",
+      "response_data": null
+    },
+    {
+      "test": "User Registration (Email)",
+      "success": true,
+      "details": "Email registration successful, OTP sent",
+      "timestamp": "2025-08-25T19:58:44.284421",
+      "response_data": {
+        "success": true,
+        "message": "OTP sent successfully"
+      }
+    },
+    {
+      "test": "Profile Management",
+      "success": false,
+      "details": "No auth token available - skipping profile tests",
+      "timestamp": "2025-08-25T19:58:44.284472",
+      "response_data": null
+    },
+    {
+      "test": "SOS System",
+      "success": false,
+      "details": "No auth token available - skipping SOS tests",
+      "timestamp": "2025-08-25T19:58:44.284484",
+      "response_data": null
+    },
+    {
+      "test": "Employment Module",
+      "success": false,
+      "details": "No auth token available - skipping employment tests",
+      "timestamp": "2025-08-25T19:58:44.284492",
+      "response_data": null
+    },
+    {
+      "test": "Community Features",
+      "success": false,
+      "details": "No auth token available - skipping community tests",
+      "timestamp": "2025-08-25T19:58:44.284499",
+      "response_data": null
+    },
+    {
+      "test": "Welfare Schemes",
+      "success": false,
+      "details": "No auth token available - skipping welfare schemes tests",
+      "timestamp": "2025-08-25T19:58:44.284506",
+      "response_data": null
+    },
+    {
+      "test": "Invalid Endpoint Handling",
+      "success": true,
+      "details": "404 returned for invalid endpoint",
+      "timestamp": "2025-08-25T19:58:44.333829",
+      "response_data": null
+    },
+    {
+      "test": "Unauthorized Access Handling",
+      "success": false,
+      "details": "Unexpected status code: 403",
+      "timestamp": "2025-08-25T19:58:44.341901",
+      "response_data": null
+    },
+    {
+      "test": "Invalid Token Handling",
+      "success": true,
+      "details": "401 returned for invalid token",
+      "timestamp": "2025-08-25T19:58:44.350036",
+      "response_data": null
+    }
+  ]
+}
