@@ -119,14 +119,36 @@ class AaiSahebAPITester:
         except Exception as e:
             self.log_test("User Registration (Phone)", False, f"Exception: {str(e)}")
         
-        # Test OTP verification for registration (using mock OTP)
+        # Test OTP verification for registration (using actual OTP from logs)
         try:
-            # Use a mock OTP for testing
-            otp_data = {
-                "method": "phone",
-                "phone": self.test_user_data["phone"],
-                "otp": "123456"  # Mock OTP for testing
-            }
+            # In a real test environment, we would get the OTP from logs or use a test OTP
+            # For now, let's try a few common test OTPs and also check the actual generated one
+            test_otps = ["123456", "000000", "111111"]  # Common test OTPs
+            
+            # Try to get the actual OTP from recent logs
+            try:
+                import subprocess
+                result = subprocess.run(['tail', '-n', '10', '/var/log/supervisor/backend.err.log'], 
+                                      capture_output=True, text=True)
+                log_content = result.stdout
+                
+                # Extract OTP from log line like "INFO:server:Sending OTP 788015 to phone +919876543210"
+                import re
+                otp_match = re.search(r'Sending OTP (\d{6}) to phone \+919876543210', log_content)
+                if otp_match:
+                    actual_otp = otp_match.group(1)
+                    test_otps.insert(0, actual_otp)  # Try actual OTP first
+                    print(f"Found actual OTP in logs: {actual_otp}")
+            except Exception as e:
+                print(f"Could not extract OTP from logs: {e}")
+            
+            success = False
+            for otp in test_otps:
+                otp_data = {
+                    "method": "phone",
+                    "phone": self.test_user_data["phone"],
+                    "otp": otp
+                }
             
             response = self.make_request("POST", "/auth/verify-otp", otp_data)
             if response.status_code == 200:
