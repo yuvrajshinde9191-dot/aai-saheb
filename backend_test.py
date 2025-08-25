@@ -138,7 +138,8 @@ class AaiSahebAPITester:
                 
                 # Extract OTP from log line like "INFO:server:Sending OTP 788015 to phone +919876543210"
                 import re
-                otp_match = re.search(r'Sending OTP (\d{6}) to phone \+919876543210', log_content)
+                otp_pattern = f'Sending OTP (\\d{{6}}) to phone {re.escape(self.test_user_data["phone"])}'
+                otp_match = re.search(otp_pattern, log_content)
                 if otp_match:
                     actual_otp = otp_match.group(1)
                     test_otps.insert(0, actual_otp)  # Try actual OTP first
