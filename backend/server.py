@@ -496,6 +496,11 @@ async def get_jobs(
             
         jobs = await db.job_postings.find(query).skip(skip).limit(limit).to_list(limit)
         
+        # Convert ObjectId to string for JSON serialization
+        for job in jobs:
+            if "_id" in job:
+                job["_id"] = str(job["_id"])
+        
         return {"success": True, "jobs": jobs}
         
     except Exception as e:
