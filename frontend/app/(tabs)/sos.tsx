@@ -30,7 +30,7 @@ export default function SOSScreen() {
   const [isStealthMode, setIsStealthMode] = useState(false);
   const [hasPermissions, setHasPermissions] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
-  const [currentLocation, setCurrentLocation] = useState<Location.LocationObject | null>(null);
+  const [currentLocation, setCurrentLocation] = useState<any>(null);
   
   // Animation refs
   const pulseAnim = useRef(new Animated.Value(1)).current;
