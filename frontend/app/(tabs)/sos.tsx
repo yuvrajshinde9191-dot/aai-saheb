@@ -372,15 +372,13 @@ export default function SOSScreen() {
       </LinearGradient>
 
       <View style={styles.content}>
-        {/* Hidden Camera Views for Recording */}
+        {/* Status Message */}
         {hasPermissions && !isStealthMode && (
-          <View style={styles.cameraContainer}>
-            <Camera
-              ref={cameraRef}
-              style={styles.camera}
-              type={Camera.Constants.Type.front}
-              autoFocus={Camera.Constants.AutoFocus.on}
-            />
+          <View style={styles.permissionContainer}>
+            <Text style={styles.permissionText}>
+              {language === 'mr' ? 'सर्व परवानग्या दिल्या आहेत' : 
+               (language === 'hi' ? 'सभी अनुमतियां दी गई हैं' : 'All permissions granted')}
+            </Text>
           </View>
         )}
 
