@@ -502,14 +502,19 @@ const styles = StyleSheet.create({
     flex: 1,
     paddingHorizontal: 20,
   },
-  cameraContainer: {
-    height: 150,
+  permissionContainer: {
+    backgroundColor: '#E8F5E8',
     borderRadius: 12,
-    overflow: 'hidden',
+    padding: 16,
     marginVertical: 20,
+    borderWidth: 1,
+    borderColor: '#4CAF50',
   },
-  camera: {
-    flex: 1,
+  permissionText: {
+    fontSize: 14,
+    color: '#2E7D32',
+    textAlign: 'center',
+    fontWeight: '500',
   },
   sosContainer: {
     alignItems: 'center',
