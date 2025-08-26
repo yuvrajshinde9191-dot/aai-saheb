@@ -1,37 +1,14 @@
-import { useEffect } from 'react';
-import { router } from 'expo-router';
-import { View, StyleSheet } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 import { StatusBar } from 'expo-status-bar';
-import LoadingScreen from '../components/LoadingScreen';
 
 export default function IndexPage() {
-  useEffect(() => {
-    checkAuthStatus();
-  }, []);
-
-  const checkAuthStatus = async () => {
-    try {
-      const token = await AsyncStorage.getItem('userToken');
-      const hasCompletedOnboarding = await AsyncStorage.getItem('onboardingCompleted');
-      
-      if (!hasCompletedOnboarding) {
-        router.replace('/onboarding');
-      } else if (token) {
-        router.replace('/(tabs)');
-      } else {
-        router.replace('/auth');
-      }
-    } catch (error) {
-      console.error('Error checking auth status:', error);
-      router.replace('/auth');
-    }
-  };
-
   return (
     <View style={styles.container}>
       <StatusBar style="auto" />
-      <LoadingScreen />
+      <Text style={styles.title}>आई साहेब</Text>
+      <Text style={styles.subtitle}>aai Saheb</Text>
+      <Text style={styles.description}>महिला सशक्तीकरण</Text>
     </View>
   );
 }
@@ -40,5 +17,27 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#FF6B35',
+    justifyContent: 'center',
+    alignItems: 'center',
+    padding: 20,
+  },
+  title: {
+    fontSize: 48,
+    fontWeight: 'bold',
+    color: '#FFFFFF',
+    marginBottom: 8,
+    textAlign: 'center',
+  },
+  subtitle: {
+    fontSize: 24,
+    fontWeight: '600',
+    color: '#FFFFFF',
+    marginBottom: 4,
+  },
+  description: {
+    fontSize: 16,
+    color: '#FFFFFF',
+    opacity: 0.9,
+    textAlign: 'center',
   },
 });
