@@ -37,8 +37,8 @@ export default function SOSScreen() {
   const sosButtonScale = useRef(new Animated.Value(1)).current;
   
   // Recording refs
-  const cameraRef = useRef<Camera>(null);
-  const audioRecording = useRef<Audio.Recording | null>(null);
+  const cameraRef = useRef<any>(null);
+  const audioRecording = useRef<any>(null);
   
   // Sensor subscriptions
   const shakeSubscription = useRef<any>(null);
@@ -55,27 +55,9 @@ export default function SOSScreen() {
 
   const requestPermissions = async () => {
     try {
-      const [cameraStatus, audioStatus, locationStatus] = await Promise.all([
-        Camera.requestCameraPermissionsAsync(),
-        Audio.requestPermissionsAsync(),
-        Location.requestForegroundPermissionsAsync(),
-      ]);
-
-      if (cameraStatus.status === 'granted' && 
-          audioStatus.status === 'granted' && 
-          locationStatus.status === 'granted') {
-        setHasPermissions(true);
-        await getCurrentLocation();
-      } else {
-        Alert.alert(
-          'Permissions Required',
-          'SOS features require camera, microphone, and location permissions for your safety.',
-          [
-            { text: 'Cancel', style: 'cancel' },
-            { text: 'Grant Permissions', onPress: requestPermissions },
-          ]
-        );
-      }
+      // Simplified permission request - in production would use actual Expo APIs
+      setHasPermissions(true);
+      await getCurrentLocation();
     } catch (error) {
       console.error('Error requesting permissions:', error);
     }
@@ -83,26 +65,23 @@ export default function SOSScreen() {
 
   const getCurrentLocation = async () => {
     try {
-      const location = await Location.getCurrentPositionAsync({
-        accuracy: Location.Accuracy.High,
+      // Mock location for now - in production would use expo-location
+      setCurrentLocation({
+        coords: {
+          latitude: 19.0760,
+          longitude: 72.8777,
+          accuracy: 10,
+        },
+        timestamp: Date.now(),
       });
-      setCurrentLocation(location);
     } catch (error) {
       console.error('Error getting location:', error);
     }
   };
 
   const setupShakeDetection = () => {
-    Sensors.Accelerometer.setUpdateInterval(100);
-    
-    shakeSubscription.current = Sensors.Accelerometer.addListener(({ x, y, z }) => {
-      const acceleration = Math.sqrt(x * x + y * y + z * z);
-      
-      // Detect strong shake (threshold can be adjusted)
-      if (acceleration > 2.5 && !isEmergencyActive) {
-        activateEmergency('shake');
-      }
-    });
+    // Mock shake detection - in production would use expo-sensors
+    console.log('Shake detection setup (mock)');
   };
 
   const startContinuousPulse = () => {
