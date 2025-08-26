@@ -298,7 +298,7 @@ export default function ProfileScreen() {
               <Text style={styles.achievementTitle}>कौशल्य शिकणारे</Text>
               <Text style={styles.achievementSubtitle}>Skill Learner</Text>
               <Text style={styles.achievementDesc}>3 कोर्सेस पूर्ण केले</Text>
-            </div>
+            </View>
           </View>
         </View>
 
