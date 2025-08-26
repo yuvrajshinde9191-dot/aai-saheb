@@ -13,10 +13,6 @@ import {
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
-import { Camera } from 'expo-camera';
-import { Audio } from 'expo-av';
-import * as Location from 'expo-location';
-import * as Sensors from 'expo-sensors';
 import { useLanguage } from '../contexts/LanguageContext';
 import { useAuth } from '../contexts/AuthContext';
 import axios from 'axios';
