@@ -3,14 +3,14 @@
   "passed_tests": 22,
   "failed_tests": 1,
   "success_rate": 95.65217391304348,
-  "duration": 3.668936252593994,
+  "duration": 3.7486143112182617,
   "critical_issues": 1,
   "results": [
     {
       "test": "Root Health Check",
       "success": true,
       "details": "API root endpoint responding correctly",
-      "timestamp": "2025-08-25T20:02:08.336973",
+      "timestamp": "2025-08-26T06:42:24.195859",
       "response_data": {
         "message": "aai Saheb API - Women Empowerment Platform"
       }
@@ -19,17 +19,17 @@
       "test": "Health Check Endpoint",
       "success": true,
       "details": "Health endpoint responding correctly",
-      "timestamp": "2025-08-25T20:02:08.387779",
+      "timestamp": "2025-08-26T06:42:24.206574",
       "response_data": {
         "status": "healthy",
-        "timestamp": "2025-08-25T20:02:08.341908"
+        "timestamp": "2025-08-26T06:42:24.204235"
       }
     },
     {
       "test": "User Registration (Phone)",
       "success": true,
       "details": "Registration successful, OTP sent",
-      "timestamp": "2025-08-25T20:02:09.404566",
+      "timestamp": "2025-08-26T06:42:25.233124",
       "response_data": {
         "success": true,
         "message": "OTP sent successfully"
@@ -38,16 +38,16 @@
     {
       "test": "OTP Verification (Registration)",
       "success": true,
-      "details": "OTP verified with 630962, user created, token received",
-      "timestamp": "2025-08-25T20:02:09.429414",
+      "details": "OTP verified with 037041, user created, token received",
+      "timestamp": "2025-08-26T06:42:25.304855",
       "response_data": {
         "success": true,
         "message": "Login successful",
-        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlOGFhZWY3YS05ZTQ0LTQwMGQtYmU0MS0zZTVmZGE1NTFhM2YiLCJleHAiOjE3NTY3NTY5Mjl9.Lm3M-gSygbhJLJCTZ_SSswOf8WQq6AzPfAYxlE4PeHI",
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjMDc5ODI1MS00MmE4LTRiMGMtOGFhMy1mZmQzYjcxMDNmODgiLCJleHAiOjE3NTY3OTUzNDV9.nl0NyyynYvs3chJxQvHe-FQ71VthaAl8LIMgKMC-3h8",
         "user": {
-          "id": "e8aaef7a-9e44-400d-be41-3e5fda551a3f",
+          "id": "c0798251-42a8-4b0c-8aa3-ffd3b7103f88",
           "name": "प्रिया शर्मा",
-          "phone": "+9198765152128",
+          "phone": "+9198765190544",
           "email": null,
           "role": "voter",
           "language": "mr"
@@ -58,7 +58,7 @@
       "test": "User Login",
       "success": true,
       "details": "Login successful, OTP sent",
-      "timestamp": "2025-08-25T20:02:10.444962",
+      "timestamp": "2025-08-26T06:42:26.356637",
       "response_data": {
         "success": true,
         "message": "OTP sent successfully"
@@ -68,7 +68,7 @@
       "test": "User Registration (Email)",
       "success": true,
       "details": "Email registration successful, OTP sent",
-      "timestamp": "2025-08-25T20:02:11.462876",
+      "timestamp": "2025-08-26T06:42:27.378185",
       "response_data": {
         "success": true,
         "message": "OTP sent successfully"
@@ -78,13 +78,13 @@
       "test": "Get User Profile",
       "success": true,
       "details": "Profile retrieved successfully",
-      "timestamp": "2025-08-25T20:02:11.513871",
+      "timestamp": "2025-08-26T06:42:27.388397",
       "response_data": {
         "success": true,
         "user": {
-          "id": "e8aaef7a-9e44-400d-be41-3e5fda551a3f",
+          "id": "c0798251-42a8-4b0c-8aa3-ffd3b7103f88",
           "name": "प्रिया शर्मा",
-          "phone": "+9198765152128",
+          "phone": "+9198765190544",
           "email": null,
           "role": "voter",
           "language": "mr",
@@ -97,7 +97,7 @@
       "test": "Update User Profile",
       "success": true,
       "details": "Profile updated successfully",
-      "timestamp": "2025-08-25T20:02:11.524985",
+      "timestamp": "2025-08-26T06:42:27.438993",
       "response_data": {
         "success": true,
         "message": "Profile updated successfully"
@@ -107,7 +107,7 @@
       "test": "Add Trusted Contact",
       "success": true,
       "details": "Trusted contact added successfully",
-      "timestamp": "2025-08-25T20:02:11.576813",
+      "timestamp": "2025-08-26T06:42:27.491136",
       "response_data": {
         "success": true,
         "message": "Trusted contact added successfully"
@@ -116,33 +116,33 @@
     {
       "test": "SOS Activation",
       "success": true,
-      "details": "SOS activated successfully, Alert ID: 7dd87d49-17a8-47bb-bc06-83521f66cf66",
-      "timestamp": "2025-08-25T20:02:11.591354",
+      "details": "SOS activated successfully, Alert ID: 863c1943-cb50-4d0f-9a25-b96397ad45cf",
+      "timestamp": "2025-08-26T06:42:27.564284",
       "response_data": {
         "success": true,
         "message": "SOS activated successfully",
-        "alert_id": "7dd87d49-17a8-47bb-bc06-83521f66cf66"
+        "alert_id": "863c1943-cb50-4d0f-9a25-b96397ad45cf"
       }
     },
     {
       "test": "Get SOS Alerts",
       "success": true,
       "details": "Retrieved 1 SOS alerts",
-      "timestamp": "2025-08-25T20:02:11.601930",
+      "timestamp": "2025-08-26T06:42:27.614592",
       "response_data": {
         "success": true,
         "alerts": [
           {
-            "_id": "68acc1430e2b3fe07d613e64",
-            "id": "7dd87d49-17a8-47bb-bc06-83521f66cf66",
-            "user_id": "e8aaef7a-9e44-400d-be41-3e5fda551a3f",
+            "_id": "68ad57536c162ad55e352a41",
+            "id": "863c1943-cb50-4d0f-9a25-b96397ad45cf",
+            "user_id": "c0798251-42a8-4b0c-8aa3-ffd3b7103f88",
             "location": {
               "latitude": 18.5204,
               "longitude": 73.8567,
               "address": "पुणे, महाराष्ट्र",
               "accuracy": 10
             },
-            "timestamp": "2025-08-25T20:02:11.587000",
+            "timestamp": "2025-08-26T06:42:27.498000",
             "status": "active",
             "media_files": [],
             "contacts_notified": [],
@@ -155,7 +155,7 @@
       "test": "SOS Deactivation",
       "success": true,
       "details": "SOS deactivated successfully",
-      "timestamp": "2025-08-25T20:02:11.653033",
+      "timestamp": "2025-08-26T06:42:27.624150",
       "response_data": {
         "success": true,
         "message": "SOS deactivated successfully"
@@ -164,8 +164,8 @@
     {
       "test": "Get Jobs Listing",
       "success": true,
-      "details": "Retrieved 1 job listings",
-      "timestamp": "2025-08-25T20:02:11.663396",
+      "details": "Retrieved 2 job listings",
+      "timestamp": "2025-08-26T06:42:27.641044",
       "response_data": {
         "success": true,
         "jobs": [
@@ -186,6 +186,24 @@
             "created_at": "2025-08-25T19:59:25.574000",
             "application_deadline": null,
             "created_by": "466afa6f-54b7-45ba-9f84-23d5a2f8d360"
+          },
+          {
+            "_id": "68acc1430e2b3fe07d613e65",
+            "id": "bff6e0e5-4237-4736-aa73-9667e89d2dfe",
+            "title": "महिला सहायक",
+            "company": "महिला विकास संस्था",
+            "location": "पुणे, महाराष्ट्र",
+            "description": "महिलांसाठी विशेष नोकरी संधी. लवचिक वेळापत्रक आणि सुरक्षित कार्य वातावरण.",
+            "requirements": [
+              "१२वी पास",
+              "मराठी भाषेचे ज्ञान",
+              "संगणक मूलभूत ज्ञान"
+            ],
+            "salary_range": "₹15,000 - ₹25,000",
+            "is_women_friendly": true,
+            "created_at": "2025-08-25T20:02:11.679000",
+            "application_deadline": null,
+            "created_by": "e8aaef7a-9e44-400d-be41-3e5fda551a3f"
           }
         ]
       }
@@ -194,7 +212,7 @@
       "test": "Get Jobs with Location Filter",
       "success": true,
       "details": "Retrieved filtered jobs for Pune",
-      "timestamp": "2025-08-25T20:02:11.674364",
+      "timestamp": "2025-08-26T06:42:27.651767",
       "response_data": {
         "success": true,
         "jobs": [
@@ -215,6 +233,24 @@
             "created_at": "2025-08-25T19:59:25.574000",
             "application_deadline": null,
             "created_by": "466afa6f-54b7-45ba-9f84-23d5a2f8d360"
+          },
+          {
+            "_id": "68acc1430e2b3fe07d613e65",
+            "id": "bff6e0e5-4237-4736-aa73-9667e89d2dfe",
+            "title": "महिला सहायक",
+            "company": "महिला विकास संस्था",
+            "location": "पुणे, महाराष्ट्र",
+            "description": "महिलांसाठी विशेष नोकरी संधी. लवचिक वेळापत्रक आणि सुरक्षित कार्य वातावरण.",
+            "requirements": [
+              "१२वी पास",
+              "मराठी भाषेचे ज्ञान",
+              "संगणक मूलभूत ज्ञान"
+            ],
+            "salary_range": "₹15,000 - ₹25,000",
+            "is_women_friendly": true,
+            "created_at": "2025-08-25T20:02:11.679000",
+            "application_deadline": null,
+            "created_by": "e8aaef7a-9e44-400d-be41-3e5fda551a3f"
           }
         ]
       }
@@ -223,7 +259,7 @@
       "test": "Create Job Posting",
       "success": true,
       "details": "Job posting created successfully",
-      "timestamp": "2025-08-25T20:02:11.684530",
+      "timestamp": "2025-08-26T06:42:27.705492",
       "response_data": {
         "success": true,
         "message": "Job posting created successfully"
@@ -232,11 +268,43 @@
     {
       "test": "Get Community Posts",
       "success": true,
-      "details": "Retrieved 2 community posts",
-      "timestamp": "2025-08-25T20:02:11.736286",
+      "details": "Retrieved 4 community posts",
+      "timestamp": "2025-08-26T06:42:27.717961",
       "response_data": {
         "success": true,
         "posts": [
+          {
+            "_id": "68acc1430e2b3fe07d613e67",
+            "id": "0dcd32cf-bdec-4c14-87d8-c16199298dac",
+            "user_id": "e8aaef7a-9e44-400d-be41-3e5fda551a3f",
+            "content": "मला घरगुती हिंसाचाराची समस्या आहे. कोणी मदत करू शकेल का? कृपया गुप्ततेने.",
+            "media_files": [],
+            "tags": [
+              "मदत",
+              "सुरक्षा",
+              "गुप्त"
+            ],
+            "likes_count": 0,
+            "comments_count": 0,
+            "is_anonymous": true,
+            "created_at": "2025-08-25T20:02:11.753000"
+          },
+          {
+            "_id": "68acc1430e2b3fe07d613e66",
+            "id": "870ffaeb-2e3c-4cdd-955c-3ee6b39ec5c2",
+            "user_id": "e8aaef7a-9e44-400d-be41-3e5fda551a3f",
+            "content": "नमस्कार बहिणींनो! मी नुकतीच एक नवीन व्यवसाय सुरू केला आहे. कोणाला काही सल्ला द्यायचा असेल तर कृपया सांगा. 💪👩‍💼",
+            "media_files": [],
+            "tags": [
+              "व्यवसाय",
+              "महिला_उद्योजक",
+              "सल्ला"
+            ],
+            "likes_count": 0,
+            "comments_count": 0,
+            "is_anonymous": false,
+            "created_at": "2025-08-25T20:02:11.742000"
+          },
           {
             "_id": "68acc09dccae106253646110",
             "id": "24875683-f931-4ccb-911e-400556b5a4dc",
@@ -276,7 +344,7 @@
       "test": "Create Community Post",
       "success": true,
       "details": "Community post created successfully",
-      "timestamp": "2025-08-25T20:02:11.746792",
+      "timestamp": "2025-08-26T06:42:27.730039",
       "response_data": {
         "success": true,
         "message": "Post created successfully"
@@ -286,7 +354,7 @@
       "test": "Create Anonymous Post",
       "success": true,
       "details": "Anonymous post created successfully",
-      "timestamp": "2025-08-25T20:02:11.798179",
+      "timestamp": "2025-08-26T06:42:27.780763",
       "response_data": {
         "success": true,
         "message": "Post created successfully"
@@ -296,7 +364,7 @@
       "test": "Get Welfare Schemes",
       "success": true,
       "details": "Retrieved 2 welfare schemes",
-      "timestamp": "2025-08-25T20:02:11.808338",
+      "timestamp": "2025-08-26T06:42:27.789591",
       "response_data": {
         "success": true,
         "schemes": [
@@ -353,28 +421,28 @@
       "test": "Welfare Scheme Structure",
       "success": true,
       "details": "Scheme data structure is valid",
-      "timestamp": "2025-08-25T20:02:11.808372",
+      "timestamp": "2025-08-26T06:42:27.789623",
       "response_data": null
     },
     {
       "test": "Invalid Endpoint Handling",
       "success": true,
       "details": "404 returned for invalid endpoint",
-      "timestamp": "2025-08-25T20:02:11.857291",
+      "timestamp": "2025-08-26T06:42:27.796317",
       "response_data": null
     },
     {
       "test": "Unauthorized Access Handling",
       "success": false,
       "details": "Unexpected status code: 403",
-      "timestamp": "2025-08-25T20:02:11.906599",
+      "timestamp": "2025-08-26T06:42:27.844552",
       "response_data": null
     },
     {
       "test": "Invalid Token Handling",
       "success": true,
       "details": "401 returned for invalid token",
-      "timestamp": "2025-08-25T20:02:11.914525",
+      "timestamp": "2025-08-26T06:42:27.850778",
       "response_data": null
     }
   ]
