@@ -1,0 +1,105 @@
+<analysis>
+The previous AI engineer was tasked with building a comprehensive React Native mobile application named aai Saheb from scratch, following a detailed product description for women's empowerment in Maharashtra. The initial approach involved setting up a React Native Expo frontend with Expo Router and a FastAPI/MongoDB backend.
+
+The development trajectory reveals a persistent struggle with dependency management and Expo's web/mobile bundling, leading to repeated blank screens and 500 errors. Despite successful backend API testing, the frontend proved challenging, with the AI engineer making multiple attempts to fix  versions, clear caches, and simplify the app structure to achieve a stable render. A key moment was the AI's premature declaration of success with a static screen, which was strongly rejected by the user. Recognizing this, the AI engineer apologized and initiated a full rebuild of the core application modules, focusing on functional components rather than placeholders. The work was paused immediately before testing this rebuilt version.
+</analysis>
+
+<product_requirements>
+The aai Saheb mobile application aims to empower women and promote civic engagement in Maharashtra, India. It's a multi-page app requiring:
+1.  **Authentication & Onboarding**: OTP/email login, role selection (Voter, Job Seeker, Student, Volunteer, Candidate, NGO, Admin), language selector (Marathi, Hindi, English), consent screens (DPDP Act).
+2.  **SOS Safety Module**: One-tap, shake-to-alert, triple-tap power button activation. Stealth mode, front/rear camera + microphone recording (rolling 30-60s encrypted video/audio clips), real-time GPS, SMS/push alerts to 5 contacts, in-app map of police/hospitals/shelters.
+3.  **Employment & Skills**: Curated job board, resume builder, courses (digital literacy, finance, vocational), offline lessons, quizzes, micro-credentials, mentor booking, AI chat.
+4.  **Education & Health**: Exam prep, entrepreneurship, scholarship wizard, clinic/counselor directory, anonymous mental health chat.
+5.  **Welfare Schemes**: Catalog of central/state schemes, eligibility wizard, NGO appointment booking.
+6.  **Community Forums**: Groups, multimedia posts, polls, AI/manual moderation, flag reporting.
+7.  **Political Engagement**: Candidate profiles, moderated Q&A, geo-targeted polls, volunteer management, role-specific dashboards.
+8.  **Admin Console**: Role-based content/campaign management, translation workflow, moderation, analytics.
+**Technical & Quality**: React Native frontend, FastAPI backend, MongoDB (originally PostgreSQL/Prisma), JWT+OTP auth, offline-first, ≤50 MB bundle, p95 API ≤300 ms, scalability (10M users), security (TLS 1.2+, AES-256, RBAC), compliance (DPDP, POCSO, WCAG 2.1 AA).
+**Integrations**: OTP/SMS (API key ), Push notifications, Map APIs.
+The user explicitly demanded a fully functional, production-ready app with native device integrations and live API connections, rejecting any static screens or mockups.
+</product_requirements>
+
+<key_technical_concepts>
+- **React Native & Expo Router**: Frontend framework for cross-platform mobile development, with file-based routing.
+- **FastAPI & MongoDB**: Backend framework and NoSQL database.
+- **JWT + OTP Authentication**: Secure user authentication mechanism.
+- **State Management**:  for authentication state.
+- **Device Integrations**: Camera, Microphone, GPS for SOS module (using , ).
+- **Dependency Management**: Extensive use of yarn install v1.22.22
+info No lockfile found.
+[1/4] Resolving packages...
+[2/4] Fetching packages...
+[3/4] Linking dependencies...
+[4/4] Building fresh packages...
+success Saved lockfile.
+Done in 0.05s. to manage  dependencies.
+</key_technical_concepts>
+
+<code_architecture>
+The application follows a full-stack architecture with a React Native frontend (managed by Expo) and a FastAPI backend with MongoDB.
+
+
+
+-   :
+    -   **Importance**: Defines project metadata and all frontend dependencies.
+    -   **Changes**: Repeatedly edited to add and correct versions of  libraries (e.g., , , , , ), , , , , , , . These changes were primarily to resolve version conflicts and missing dependency errors reported by the Expo Metro bundler.
+-   :
+    -   **Importance**: Lists Python dependencies for the FastAPI backend.
+    -   **Changes**: Modified to include To use the fastapi command, please install "fastapi[standard]":
+
+	pip install "fastapi[standard]", , , , ,  for backend functionality and authentication.
+-   :
+    -   **Importance**: The core FastAPI backend application, handling API routes, database interactions, and business logic.
+    -   **Changes**: Initially set up with basic structure. Later, a comprehensive version was created, including authentication routes (register, login, OTP), SOS endpoints, user management, and other module-specific APIs. It was later rebuilt to ensure full functionality.
+-   :
+    -   **Importance**: The initial entry point and home screen of the application.
+    -   **Changes**: Initially set up as a simple screen. Later simplified to a Hello, aai Saheb then Welcome to aai Saheb! screen multiple times to debug bundling issues. Most recently, it was part of a complete rebuild, likely setting up the initial navigation or a welcoming screen.
+-   :
+    -   **Importance**: Configures the main tab-based navigation for the application.
+    -   **Changes**: Created to define the tab bar structure for primary navigation, including tabs like SOS, Employment, Community, and Profile.
+-    & :
+    -   **Importance**: Provide a React Context for managing user authentication state across the application.  is a custom hook for easy access to the context.
+    -   **Changes**: Created as part of the initial core infrastructure setup for authentication.
+-    & :
+    -   **Importance**: Handle user login, registration, and potentially OTP verification.  might serve as a navigation wrapper or a dedicated authentication flow screen.
+    -   **Changes**: Created to manage the authentication flow, including UI for OTP/email login.  was recreated as part of the latest rebuild.
+-   :
+    -   **Importance**: Implements the critical SOS safety module, including camera, microphone, and GPS features.
+    -   **Changes**: Created to handle SOS activation, media recording, GPS tracking, and alerts. This file was rebuilt to ensure real camera/microphone functionality.
+-   :
+    -   **Importance**: Manages the job board, resume builder, and skills courses features.
+    -   **Changes**: Created as one of the main tab screens, likely including job listings and course content placeholders. It was recreated during the latest rebuild.
+-   :
+    -   **Importance**: Facilitates community forums, groups, and multimedia sharing.
+    -   **Changes**: Created as a tab screen for community features and was rebuilt to integrate full functionality.
+-   :
+    -   **Importance**: Handles user profiles, settings, and achievements.
+    -   **Changes**: Created as a tab screen. Encountered a syntax error at one point (though the AI later found the syntax correct in the file), suggesting previous problematic edits. It was rebuilt in the most recent phase.
+</code_architecture>
+
+<pending_tasks>
+- Conduct comprehensive automated frontend testing of the *rebuilt* aai Saheb React Native mobile app using .
+- Verify full functionality of all features, including the SOS module (camera/mic activation, GPS), authentication, employment, community, and multi-language support on a real device.
+- Address any remaining bundling or runtime errors encountered during frontend testing.
+</pending_tasks>
+
+<current_work>
+Immediately before this summary request, the AI engineer was in the process of a complete rebuild of the aai Saheb application, following the user's explicit rejection of a static, non-functional delivery. The rebuild aimed to ensure all features are genuinely functional and integrated.
+
+The AI engineer successfully recreated or updated several core frontend files:
+-   : (Re)created as part of the new app structure.
+-   : (Re)created for authentication state management.
+-   : (Re)created as a hook for authentication.
+-   : (Re)created for the authentication UI.
+-   : (Re)created with the explicit goal of implementing real camera/microphone functionality for the SOS module.
+-   : (Re)created for authentication flow.
+-   : (Re)created for employment features.
+-   : (Re)created for community features.
+-   : (Re)created for profile management.
+
+The backend () and frontend are reported to be running successfully according to the AI's internal checks, and the very next step is to test this newly rebuilt and expanded application to confirm full functionality, especially on Expo Go.
+</current_work>
+
+<optional_next_step>
+Test the complete rebuilt application for full functionality using the frontend testing agent.
+</optional_next_step>
