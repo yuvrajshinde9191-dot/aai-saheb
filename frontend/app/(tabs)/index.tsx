@@ -20,7 +20,7 @@ import axios from 'axios';
 import Constants from 'expo-constants';
 
 const { width } = Dimensions.get('window');
-const API_BASE_URL = Constants.expoConfig?.extra?.backendUrl || 'https://maharashtra-empower.preview.emergentagent.com';
+const API_BASE_URL = Constants.expoConfig?.extra?.backendUrl || 'https://empower-her-2.preview.emergentagent.com';
 
 interface NewsItem {
   id: string;

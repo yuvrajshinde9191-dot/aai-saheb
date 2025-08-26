@@ -19,7 +19,7 @@ import axios from 'axios';
 import Constants from 'expo-constants';
 
 const { width, height } = Dimensions.get('window');
-const API_BASE_URL = Constants.expoConfig?.extra?.backendUrl || 'https://maharashtra-empower.preview.emergentagent.com';
+const API_BASE_URL = Constants.expoConfig?.extra?.backendUrl || 'https://empower-her-2.preview.emergentagent.com';
 
 export default function SOSScreen() {
   const { t, language } = useLanguage();

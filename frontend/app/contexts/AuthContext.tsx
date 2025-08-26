@@ -47,7 +47,7 @@ interface AuthProviderProps {
   children: ReactNode;
 }
 
-const API_BASE_URL = Constants.expoConfig?.extra?.backendUrl || 'https://maharashtra-empower.preview.emergentagent.com';
+const API_BASE_URL = Constants.expoConfig?.extra?.backendUrl || 'https://empower-her-2.preview.emergentagent.com';
 
 export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const [user, setUser] = useState<User | null>(null);
