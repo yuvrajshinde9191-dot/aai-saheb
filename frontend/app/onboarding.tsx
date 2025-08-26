@@ -3,224 +3,300 @@ import {
   View,
   Text,
   StyleSheet,
-  ScrollView,
   TouchableOpacity,
+  ScrollView,
+  Dimensions,
   Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
+import { useLanguage } from './contexts/LanguageContext';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
-const languages = [
-  { code: 'mr', name: 'मराठी', flag: '🇮🇳' },
-  { code: 'hi', name: 'हिन्दी', flag: '🇮🇳' },
-  { code: 'en', name: 'English', flag: '🇬🇧' },
-];
+const { width } = Dimensions.get('window');
 
 const roles = [
-  { id: 'voter', name: 'मतदार / Voter', icon: 'person-circle', color: '#FF6B35' },
-  { id: 'jobSeeker', name: 'नोकरी शोधणारे / Job Seeker', icon: 'briefcase', color: '#F7931E' },
-  { id: 'student', name: 'विद्यार्थी / Student', icon: 'school', color: '#FFD23F' },
-  { id: 'volunteer', name: 'स्वयंसेवक / Volunteer', icon: 'hand-left', color: '#4CAF50' },
-  { id: 'candidate', name: 'उमेदवार / Candidate', icon: 'podium', color: '#2196F3' },
-  { id: 'ngoPartner', name: 'NGO भागीदार / NGO Partner', icon: 'heart', color: '#9C27B0' },
-  { id: 'admin', name: 'प्रशासक / Admin', icon: 'settings', color: '#607D8B' },
+  { id: 'voter', icon: 'ballot', nameEn: 'Voter', nameHi: 'मतदाता', nameMr: 'मतदार' },
+  { id: 'job_seeker', icon: 'briefcase', nameEn: 'Job Seeker', nameHi: 'नौकरी तलाशने वाला', nameMr: 'नोकरी शोधक' },
+  { id: 'student', icon: 'school', nameEn: 'Student', nameHi: 'छात्र', nameMr: 'विद्यार्थी' },
+  { id: 'volunteer', icon: 'heart', nameEn: 'Volunteer', nameHi: 'स्वयंसेवक', nameMr: 'स्वयंसेवक' },
+  { id: 'candidate', icon: 'person-add', nameEn: 'Candidate', nameHi: 'उम्मीदवार', nameMr: 'उमेदवार' },
+  { id: 'ngo', icon: 'people', nameEn: 'NGO Partner', nameHi: 'एनजीओ पार्टनर', nameMr: 'एनजीओ भागीदार' },
+];
+
+const languages = [
+  { id: 'en', name: 'English', nativeName: 'English' },
+  { id: 'hi', name: 'Hindi', nativeName: 'हिंदी' },
+  { id: 'mr', name: 'Marathi', nativeName: 'मराठी' },
 ];
 
 export default function OnboardingScreen() {
-  const [selectedLanguage, setSelectedLanguage] = useState('mr');
-  const [selectedRole, setSelectedRole] = useState('');
-  const [currentStep, setCurrentStep] = useState(1);
+  const { language, setLanguage, t } = useLanguage();
+  const [currentStep, setCurrentStep] = useState(0);
+  const [selectedRole, setSelectedRole] = useState<string>('');
+  const [selectedLanguage, setSelectedLanguage] = useState(language);
+  const [consentGiven, setConsentGiven] = useState(false);
 
-  const handleNext = () => {
-    if (currentStep === 1 && selectedLanguage) {
+  const steps = [
+    'language',
+    'role',
+    'consent',
+    'complete'
+  ];
+
+  const translations = {
+    en: {
+      welcome: 'Welcome to aai Saheb',
+      languageSelection: 'Choose Your Language',
+      roleSelection: 'Select Your Role',
+      dataConsent: 'Privacy & Data Consent',
+      getStarted: "Let's Get Started",
+      next: 'Next',
+      back: 'Back',
+      finish: 'Complete Setup',
+      consentText: 'I agree to the data processing as per DPDP Act 2023. Your data will be used solely for women empowerment services.',
+      consentRequired: 'Please accept the consent to continue',
+      roleRequired: 'Please select your role to continue',
+    },
+    hi: {
+      welcome: 'आई साहेब में आपका स्वागत है',
+      languageSelection: 'अपनी भाषा चुनें',
+      roleSelection: 'अपनी भूमिका चुनें',
+      dataConsent: 'गोपनीयता और डेटा सहमति',
+      getStarted: 'चलिए शुरू करते हैं',
+      next: 'आगे',
+      back: 'वापस',
+      finish: 'सेटअप पूरा करें',
+      consentText: 'मैं DPDP अधिनियम 2023 के अनुसार डेटा प्रसंस्करण से सहमत हूं। आपका डेटा केवल महिला सशक्तिकरण सेवाओं के लिए उपयोग किया जाएगा।',
+      consentRequired: 'कृपया जारी रखने के लिए सहमति स्वीकार करें',
+      roleRequired: 'कृपया जारी रखने के लिए अपनी भूमिका चुनें',
+    },
+    mr: {
+      welcome: 'आई साहेबमध्ये आपले स्वागत आहे',
+      languageSelection: 'आपली भाषा निवडा',
+      roleSelection: 'आपली भूमिका निवडा',
+      dataConsent: 'गोपनीयता आणि डेटा संमती',
+      getStarted: 'चला सुरुवात करूया',
+      next: 'पुढे',
+      back: 'मागे',
+      finish: 'सेटअप पूर्ण करा',
+      consentText: 'मी DPDP कायदा 2023 नुसार डेटा प्रक्रियेस सहमती देतो. तुमचा डेटा केवळ महिला सशक्तिकरणाच्या सेवांसाठी वापरला जाईल.',
+      consentRequired: 'कॉन्टिन्यू करण्यासाठी कृपया संमती स्वीकारा',
+      roleRequired: 'कॉन्टिन्यू करण्यासाठी कृपया तुमची भूमिका निवडा',
+    },
+  };
+
+  const tr = translations[selectedLanguage as keyof typeof translations];
+
+  const handleNext = async () => {
+    if (currentStep === 0) {
+      // Language selection
+      await setLanguage(selectedLanguage as any);
+      setCurrentStep(1);
+    } else if (currentStep === 1) {
+      // Role selection
+      if (!selectedRole) {
+        Alert.alert('Required', tr.roleRequired);
+        return;
+      }
       setCurrentStep(2);
-    } else if (currentStep === 2 && selectedRole) {
+    } else if (currentStep === 2) {
+      // Consent
+      if (!consentGiven) {
+        Alert.alert('Required', tr.consentRequired);
+        return;
+      }
       setCurrentStep(3);
     } else if (currentStep === 3) {
-      completeOnboarding();
+      // Complete onboarding
+      await completeOnboarding();
+    }
+  };
+
+  const handleBack = () => {
+    if (currentStep > 0) {
+      setCurrentStep(currentStep - 1);
     }
   };
 
   const completeOnboarding = async () => {
     try {
-      await AsyncStorage.setItem('onboardingCompleted', 'true');
+      await AsyncStorage.setItem('hasOnboarded', 'true');
+      await AsyncStorage.setItem('selectedRole', selectedRole);
       await AsyncStorage.setItem('selectedLanguage', selectedLanguage);
-      await AsyncStorage.setItem('userRole', selectedRole);
+      await AsyncStorage.setItem('consentGiven', 'true');
       
-      Alert.alert(
-        'स्वागत आहे / Welcome!',
-        'तुमची नोंदणी पूर्ण झाली आहे / Your setup is complete',
-        [{ text: 'ठीक आहे / OK', onPress: () => router.replace('/auth') }]
-      );
+      router.replace('/auth');
     } catch (error) {
-      Alert.alert('त्रुटी / Error', 'प्राथमिकता जतन करण्यात अयशस्वी / Failed to save preferences');
+      console.error('Error completing onboarding:', error);
     }
   };
 
   const renderLanguageSelection = () => (
-    <View style={styles.stepContent}>
-      <Text style={styles.stepTitle}>भाषा निवडा / Choose Language</Text>
-      <Text style={styles.stepSubtitle}>आपली पसंतीची भाषा निवडा / Select your preferred language</Text>
-      
-      {languages.map((lang) => (
-        <TouchableOpacity
-          key={lang.code}
-          style={[
-            styles.optionButton,
-            selectedLanguage === lang.code && styles.selectedOption
-          ]}
-          onPress={() => setSelectedLanguage(lang.code)}
-        >
-          <Text style={styles.flag}>{lang.flag}</Text>
-          <Text style={[
-            styles.optionText,
-            selectedLanguage === lang.code && styles.selectedOptionText
-          ]}>
-            {lang.name}
-          </Text>
-          {selectedLanguage === lang.code && (
-            <Ionicons name="checkmark-circle" size={24} color="#FFFFFF" />
-          )}
-        </TouchableOpacity>
-      ))}
+    <View style={styles.stepContainer}>
+      <Text style={styles.stepTitle}>{tr.languageSelection}</Text>
+      <View style={styles.optionsContainer}>
+        {languages.map((lang) => (
+          <TouchableOpacity
+            key={lang.id}
+            style={[
+              styles.languageOption,
+              selectedLanguage === lang.id && styles.selectedOption,
+            ]}
+            onPress={() => setSelectedLanguage(lang.id as any)}
+          >
+            <Text style={[
+              styles.languageText,
+              selectedLanguage === lang.id && styles.selectedText,
+            ]}>
+              {lang.nativeName}
+            </Text>
+            <Text style={[
+              styles.languageSubtext,
+              selectedLanguage === lang.id && styles.selectedText,
+            ]}>
+              {lang.name}
+            </Text>
+          </TouchableOpacity>
+        ))}
+      </View>
     </View>
   );
 
   const renderRoleSelection = () => (
-    <View style={styles.stepContent}>
-      <Text style={styles.stepTitle}>आपली भूमिका निवडा / Select Your Role</Text>
-      <Text style={styles.stepSubtitle}>तुम्ही कोण आहात? / Who are you?</Text>
-      
-      <ScrollView style={styles.roleContainer} showsVerticalScrollIndicator={false}>
+    <View style={styles.stepContainer}>
+      <Text style={styles.stepTitle}>{tr.roleSelection}</Text>
+      <View style={styles.rolesGrid}>
         {roles.map((role) => (
           <TouchableOpacity
             key={role.id}
             style={[
-              styles.roleButton,
-              selectedRole === role.id && { backgroundColor: role.color }
+              styles.roleOption,
+              selectedRole === role.id && styles.selectedOption,
             ]}
             onPress={() => setSelectedRole(role.id)}
           >
-            <Ionicons 
-              name={role.icon as any} 
-              size={24} 
-              color={selectedRole === role.id ? '#FFFFFF' : role.color} 
+            <Ionicons
+              name={role.icon as any}
+              size={32}
+              color={selectedRole === role.id ? '#FFFFFF' : '#FF6B35'}
             />
             <Text style={[
               styles.roleText,
-              selectedRole === role.id && styles.selectedRoleText
+              selectedRole === role.id && styles.selectedText,
             ]}>
-              {role.name}
+              {selectedLanguage === 'mr' ? role.nameMr : 
+               selectedLanguage === 'hi' ? role.nameHi : role.nameEn}
             </Text>
-            {selectedRole === role.id && (
-              <Ionicons name="checkmark-circle" size={20} color="#FFFFFF" />
-            )}
           </TouchableOpacity>
         ))}
-      </ScrollView>
+      </View>
     </View>
   );
 
   const renderConsent = () => (
-    <View style={styles.stepContent}>
-      <Text style={styles.stepTitle}>डेटा संमती / Data Consent</Text>
-      <ScrollView style={styles.consentContainer} showsVerticalScrollIndicator={false}>
-        <Text style={styles.consentText}>
-          आम्ही तुमच्या डेटाची काळजी घेतो. कृपया खालील अटी वाचा आणि स्वीकारा:
-        </Text>
-        <Text style={styles.consentText}>
-          We care about your data. Please read and accept the following terms:
-        </Text>
-        
-        <View style={styles.consentPoint}>
-          <Ionicons name="shield-checkmark" size={20} color="#4CAF50" />
-          <Text style={styles.pointText}>
-            आपला डेटा एकाधिकरण आणि सुरक्षित ठेवला जाईल / Your data will be encrypted and stored securely
+    <View style={styles.stepContainer}>
+      <Text style={styles.stepTitle}>{tr.dataConsent}</Text>
+      <View style={styles.consentContainer}>
+        <ScrollView style={styles.consentTextContainer}>
+          <Text style={styles.consentText}>
+            {tr.consentText}
           </Text>
-        </View>
-        
-        <View style={styles.consentPoint}>
-          <Ionicons name="eye-off" size={20} color="#4CAF50" />
-          <Text style={styles.pointText}>
-            आपली माहिती तृतीय पक्षांसह सामायिक केली जाणार नाही / Your information will not be shared with third parties
+          <Text style={styles.consentDetails}>
+            {selectedLanguage === 'mr' ? 
+              '• तुमची वैयक्तिक माहिती सुरक्षित ठेवली जाईल\n• तुम्ही कधीही तुमची संमती मागे घेऊ शकता\n• आमच्या गोपनीयता धोरणाबद्दल अधिक माहिती ऐपमध्ये उपलब्ध आहे' :
+              selectedLanguage === 'hi' ? 
+              '• आपकी व्यक्तिगत जानकारी सुरक्षित रखी जाएगी\n• आप कभी भी अपनी सहमति वापस ले सकते हैं\n• हमारी गोपनीयता नीति के बारे में अधिक जानकारी ऐप में उपलब्ध है' :
+              '• Your personal information will be kept secure\n• You can withdraw your consent at any time\n• More details about our privacy policy are available in the app'
+            }
           </Text>
-        </View>
+        </ScrollView>
         
-        <View style={styles.consentPoint}>
-          <Ionicons name="trash" size={20} color="#4CAF50" />
-          <Text style={styles.pointText}>
-            तुम्ही कधीही तुमचा डेटा हटवू शकता / You can delete your data at any time
+        <TouchableOpacity
+          style={styles.consentCheckbox}
+          onPress={() => setConsentGiven(!consentGiven)}
+        >
+          <Ionicons
+            name={consentGiven ? "checkbox" : "square-outline"}
+            size={24}
+            color="#FF6B35"
+          />
+          <Text style={styles.consentCheckboxText}>
+            {selectedLanguage === 'mr' ? 'मी सहमत आहे' : 
+             selectedLanguage === 'hi' ? 'मैं सहमत हूँ' : 'I agree'}
           </Text>
-        </View>
-        
-        <View style={styles.consentPoint}>
-          <Ionicons name="notifications" size={20} color="#4CAF50" />
-          <Text style={styles.pointText}>
-            आपत्कालीन परिस्थितीत तुमच्या संपर्कांना सूचना दिली जाईल / Emergency contacts will be notified in crisis situations
-          </Text>
-        </View>
-      </ScrollView>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 
+  const renderComplete = () => (
+    <View style={[styles.stepContainer, styles.completeContainer]}>
+      <Ionicons name="checkmark-circle" size={80} color="#4CAF50" />
+      <Text style={styles.completeTitle}>
+        {selectedLanguage === 'mr' ? 'स्वागत आहे!' : 
+         selectedLanguage === 'hi' ? 'स्वागत है!' : 'Welcome!'}
+      </Text>
+      <Text style={styles.completeText}>
+        {selectedLanguage === 'mr' ? 'तुमचे सेटअप पूर्ण झाले आहे' : 
+         selectedLanguage === 'hi' ? 'आपका सेटअप पूरा हो गया है' : 'Your setup is complete'}
+      </Text>
+    </View>
+  );
+
+  const renderStep = () => {
+    switch (currentStep) {
+      case 0:
+        return renderLanguageSelection();
+      case 1:
+        return renderRoleSelection();
+      case 2:
+        return renderConsent();
+      case 3:
+        return renderComplete();
+      default:
+        return renderLanguageSelection();
+    }
+  };
+
   return (
     <SafeAreaView style={styles.container}>
-      <LinearGradient
-        colors={['#FF6B35', '#F7931E']}
-        style={styles.gradient}
-      >
+      <LinearGradient colors={['#FF6B35', '#F7931E', '#FFD23F']} style={styles.background}>
         <View style={styles.header}>
+          <Text style={styles.welcomeText}>{tr.welcome}</Text>
+          
+          {/* Progress indicator */}
           <View style={styles.progressContainer}>
-            {[1, 2, 3].map((step) => (
+            {steps.map((_, index) => (
               <View
-                key={step}
+                key={index}
                 style={[
                   styles.progressDot,
-                  currentStep >= step && styles.activeProgressDot
+                  index <= currentStep && styles.progressDotActive,
                 ]}
               />
             ))}
           </View>
-          <Text style={styles.stepCounter}>{currentStep} / 3</Text>
         </View>
 
-        <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
-          {currentStep === 1 && renderLanguageSelection()}
-          {currentStep === 2 && renderRoleSelection()}
-          {currentStep === 3 && renderConsent()}
-        </ScrollView>
+        <View style={styles.contentContainer}>
+          {renderStep()}
+        </View>
 
-        <View style={styles.footer}>
-          {currentStep > 1 && (
-            <TouchableOpacity
-              style={styles.backButton}
-              onPress={() => setCurrentStep(currentStep - 1)}
-            >
-              <Ionicons name="arrow-back" size={24} color="#FFFFFF" />
-              <Text style={styles.backText}>मागे / Back</Text>
+        <View style={styles.buttonsContainer}>
+          {currentStep > 0 && currentStep < 3 && (
+            <TouchableOpacity style={styles.backButton} onPress={handleBack}>
+              <Text style={styles.backButtonText}>{tr.back}</Text>
             </TouchableOpacity>
           )}
           
-          <TouchableOpacity
-            style={[
-              styles.nextButton,
-              (currentStep === 1 && !selectedLanguage) || 
-              (currentStep === 2 && !selectedRole) ? 
-              styles.disabledButton : null
-            ]}
-            onPress={handleNext}
-            disabled={
-              (currentStep === 1 && !selectedLanguage) || 
-              (currentStep === 2 && !selectedRole)
-            }
-          >
-            <Text style={styles.nextText}>
-              {currentStep === 3 ? 'सुरु करा / Start' : 'पुढे / Next'}
+          <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
+            <Text style={styles.nextButtonText}>
+              {currentStep === 3 ? tr.finish : 
+               currentStep === 0 ? tr.getStarted : tr.next}
             </Text>
-            <Ionicons name="arrow-forward" size={24} color="#FFFFFF" />
           </TouchableOpacity>
         </View>
       </LinearGradient>
@@ -232,163 +308,187 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
-  gradient: {
+  background: {
     flex: 1,
   },
   header: {
-    paddingHorizontal: 24,
-    paddingTop: 16,
-    paddingBottom: 24,
+    paddingHorizontal: 20,
+    paddingTop: 20,
+    paddingBottom: 30,
     alignItems: 'center',
   },
-  progressContainer: {
-    flexDirection: 'row',
-    marginBottom: 8,
-  },
-  progressDot: {
-    width: 10,
-    height: 10,
-    borderRadius: 5,
-    backgroundColor: 'rgba(255, 255, 255, 0.3)',
-    marginHorizontal: 4,
-  },
-  activeProgressDot: {
-    backgroundColor: '#FFFFFF',
-  },
-  stepCounter: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    fontWeight: '600',
-  },
-  content: {
-    flex: 1,
-    paddingHorizontal: 24,
-  },
-  stepContent: {
-    paddingBottom: 24,
-  },
-  stepTitle: {
+  welcomeText: {
     fontSize: 28,
     fontWeight: 'bold',
     color: '#FFFFFF',
     textAlign: 'center',
-    marginBottom: 8,
+    marginBottom: 20,
   },
-  stepSubtitle: {
-    fontSize: 16,
-    color: 'rgba(255, 255, 255, 0.9)',
-    textAlign: 'center',
-    marginBottom: 32,
-  },
-  optionButton: {
+  progressContainer: {
     flexDirection: 'row',
+    justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+  },
+  progressDot: {
+    width: 12,
+    height: 12,
+    borderRadius: 6,
+    backgroundColor: 'rgba(255, 255, 255, 0.3)',
+    marginHorizontal: 4,
+  },
+  progressDotActive: {
+    backgroundColor: '#FFFFFF',
+  },
+  contentContainer: {
+    flex: 1,
+    backgroundColor: '#FFFFFF',
+    marginHorizontal: 20,
+    borderRadius: 20,
+    padding: 20,
+  },
+  stepContainer: {
+    flex: 1,
+  },
+  stepTitle: {
+    fontSize: 24,
+    fontWeight: 'bold',
+    color: '#333333',
+    textAlign: 'center',
+    marginBottom: 30,
+  },
+  optionsContainer: {
+    flex: 1,
+    justifyContent: 'center',
+  },
+  languageOption: {
+    backgroundColor: '#F8F8F8',
+    padding: 20,
     borderRadius: 12,
-    padding: 16,
     marginBottom: 12,
+    alignItems: 'center',
     borderWidth: 2,
     borderColor: 'transparent',
   },
   selectedOption: {
-    backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    borderColor: '#FFFFFF',
+    backgroundColor: '#FF6B35',
+    borderColor: '#FF6B35',
   },
-  flag: {
-    fontSize: 24,
-    marginRight: 12,
-  },
-  optionText: {
-    flex: 1,
+  languageText: {
     fontSize: 18,
-    color: '#FFFFFF',
-    fontWeight: '500',
-  },
-  selectedOptionText: {
     fontWeight: '600',
+    color: '#333333',
   },
-  roleContainer: {
-    maxHeight: 400,
+  languageSubtext: {
+    fontSize: 14,
+    color: '#666666',
+    marginTop: 4,
   },
-  roleButton: {
+  selectedText: {
+    color: '#FFFFFF',
+  },
+  rolesGrid: {
+    flex: 1,
     flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+  },
+  roleOption: {
+    width: (width - 80) / 2,
+    aspectRatio: 1,
+    backgroundColor: '#F8F8F8',
     borderRadius: 12,
-    padding: 16,
-    marginBottom: 12,
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginBottom: 16,
+    borderWidth: 2,
+    borderColor: 'transparent',
   },
   roleText: {
-    flex: 1,
-    fontSize: 16,
-    color: '#FFFFFF',
-    marginLeft: 12,
-    fontWeight: '500',
-  },
-  selectedRoleText: {
+    fontSize: 14,
     fontWeight: '600',
+    color: '#333333',
+    textAlign: 'center',
+    marginTop: 8,
   },
   consentContainer: {
-    maxHeight: 400,
+    flex: 1,
+  },
+  consentTextContainer: {
+    flex: 1,
+    backgroundColor: '#F8F8F8',
+    borderRadius: 12,
+    padding: 16,
+    marginBottom: 20,
   },
   consentText: {
     fontSize: 16,
-    color: '#FFFFFF',
+    color: '#333333',
     lineHeight: 24,
     marginBottom: 16,
-    textAlign: 'center',
   },
-  consentPoint: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    backgroundColor: 'rgba(255, 255, 255, 0.1)',
-    borderRadius: 8,
-    padding: 12,
-    marginBottom: 12,
-  },
-  pointText: {
-    flex: 1,
+  consentDetails: {
     fontSize: 14,
-    color: '#FFFFFF',
-    marginLeft: 8,
+    color: '#666666',
     lineHeight: 20,
   },
-  footer: {
+  consentCheckbox: {
     flexDirection: 'row',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    paddingHorizontal: 24,
-    paddingBottom: 32,
-    paddingTop: 16,
+    backgroundColor: '#F8F8F8',
+    padding: 16,
+    borderRadius: 12,
+  },
+  consentCheckboxText: {
+    fontSize: 16,
+    color: '#333333',
+    marginLeft: 12,
+    fontWeight: '600',
+  },
+  completeContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  completeTitle: {
+    fontSize: 32,
+    fontWeight: 'bold',
+    color: '#4CAF50',
+    marginTop: 20,
+    marginBottom: 8,
+  },
+  completeText: {
+    fontSize: 18,
+    color: '#666666',
+    textAlign: 'center',
+  },
+  buttonsContainer: {
+    flexDirection: 'row',
+    paddingHorizontal: 20,
+    paddingBottom: 40,
+    paddingTop: 20,
   },
   backButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 12,
-  },
-  backText: {
-    color: '#FFFFFF',
-    fontSize: 16,
-    marginLeft: 8,
-    fontWeight: '500',
-  },
-  nextButton: {
-    flexDirection: 'row',
-    alignItems: 'center',
+    flex: 1,
     backgroundColor: 'rgba(255, 255, 255, 0.2)',
-    borderRadius: 25,
-    paddingHorizontal: 24,
-    paddingVertical: 12,
-    borderWidth: 2,
-    borderColor: '#FFFFFF',
+    paddingVertical: 16,
+    borderRadius: 12,
+    marginRight: 12,
+    alignItems: 'center',
   },
-  disabledButton: {
-    opacity: 0.5,
-  },
-  nextText: {
-    color: '#FFFFFF',
+  backButtonText: {
     fontSize: 16,
     fontWeight: '600',
-    marginRight: 8,
+    color: '#FFFFFF',
+  },
+  nextButton: {
+    flex: 2,
+    backgroundColor: '#FFFFFF',
+    paddingVertical: 16,
+    borderRadius: 12,
+    alignItems: 'center',
+  },
+  nextButtonText: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: '#FF6B35',
   },
 });
