@@ -160,36 +160,8 @@ export default function SOSScreen() {
 
     try {
       setIsRecording(true);
-
-      // Start audio recording
-      await Audio.setAudioModeAsync({
-        allowsRecordingIOS: true,
-        playsInSilentModeIOS: true,
-      });
-
-      const { recording } = await Audio.Recording.createAsync(
-        Audio.RecordingOptionsPresets.HIGH_QUALITY
-      );
-      audioRecording.current = recording;
-
-      // Start video recording (if camera available)
-      if (cameraRef.current) {
-        try {
-          const videoRecordPromise = cameraRef.current.recordAsync({
-            quality: Camera.Constants.VideoQuality['720p'],
-            maxDuration: 60, // 60 seconds rolling clips
-          });
-          
-          // Handle rolling clips (restart every 60 seconds)
-          setTimeout(() => {
-            handleRollingClips();
-          }, 60000);
-          
-        } catch (videoError) {
-          console.warn('Video recording failed:', videoError);
-        }
-      }
-
+      console.log('Emergency recording started (mock)');
+      // In production: implement actual camera/audio recording with expo-av and expo-camera
     } catch (error) {
       console.error('Error starting recording:', error);
     }
@@ -199,30 +171,12 @@ export default function SOSScreen() {
     if (!isEmergencyActive) return;
 
     try {
-      // Stop current recording
-      if (cameraRef.current) {
-        const videoUri = await cameraRef.current.stopRecording();
-        await uploadEncryptedMedia(videoUri, 'video');
-      }
-
-      if (audioRecording.current) {
-        await audioRecording.current.stopAndUnloadAsync();
-        const audioUri = audioRecording.current.getURI();
-        if (audioUri) {
-          await uploadEncryptedMedia(audioUri, 'audio');
-        }
-      }
-
-      // Start new recording cycle
-      if (isEmergencyActive) {
-        await startEmergencyRecording();
-      }
-
+      console.log('Handling rolling clips (mock)');
+      // In production: implement actual rolling video/audio clip management
     } catch (error) {
       console.error('Error handling rolling clips:', error);
     }
   };
-
   const uploadEncryptedMedia = async (uri: string, type: 'video' | 'audio') => {
     try {
       const formData = new FormData();
