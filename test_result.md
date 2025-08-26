@@ -348,17 +348,11 @@ metadata:
 
 test_plan:
   current_focus:
+    - "Re-verify backend APIs after environment changes"
     - "App Navigation and Onboarding Flow"
     - "Authentication UI with OTP/Email Support"
-    - "Home Dashboard with Quick Actions"
-  stuck_tasks:
-    - "App Navigation and Onboarding Flow"
-    - "Authentication UI with OTP/Email Support"
-    - "Home Dashboard with Quick Actions"
-    - "Employment Module with Jobs and Skills"
-    - "Community Forum with Posts and Groups"
-    - "Profile Management with Settings"
-    - "Welfare Schemes Browser"
+    - "SOS Safety Module UI with Camera/Audio"
+  stuck_tasks: []
   test_all: false
   test_priority: "high_first"
 
